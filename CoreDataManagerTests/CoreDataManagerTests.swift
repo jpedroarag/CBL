@@ -17,18 +17,27 @@ class CoreDataManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         coreData = CoreDataManager.shared
+        coreData.resetSingleton()
+    }
+    
+    func test_nilContainerLocalized() {
+        XCTAssertEqual(CoreDataManager.CoreDataManagerErrors.nilContainer.localizedDescription, "Persistent container is nil")
+    }
+    
+    func test_invalidContextForName() {
+        XCTAssertEqual(CoreDataManager.CoreDataManagerErrors.invalidContextForName.localizedDescription, "Invalid context for given name")
     }
     
     func test_persistentContainer_success() {
-        XCTAssertNotNil(coreData.getPersistentContainer())
+        XCTAssertNotNil(coreData.newPersistentContainer())
     }
 
     func test_persistentContainer_fail() {
-        XCTAssertNil(coreData.getPersistentContainer(projectName: "Erro induzido"))
+        XCTAssertNil(coreData.newPersistentContainer(projectName: "Erro induzido"))
     }
     
     func test_getContext_success() {
-        XCTAssertEqual(coreData.persistentContainer.viewContext, try coreData.getContext())
+        XCTAssertEqual(coreData.persistentContainer?.viewContext, try coreData.getContext())
     }
     
     func test_getContext_fail() {

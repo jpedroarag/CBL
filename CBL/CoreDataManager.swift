@@ -13,42 +13,47 @@ class CoreDataManager : NSObject {
     
     enum CoreDataManagerErrors : Error {
         case nilContainer
+        case invalidContextForName
         
         var localizedDescription : String {
             switch self {
             case .nilContainer:
-                return "Persistent Container is nil"
+                return "Persistent container is nil"
+            case .invalidContextForName:
+                return "Invalid context for given name"
             }
         }
     }
     
     private override init() {}
     
-    // MARK: - Core Data stack
-    lazy var persistentContainer: NSPersistentContainer = {
-        return getPersistentContainer()
-        }()!
+    func resetSingleton() {
+        CoreDataManager.shared = CoreDataManager()
+    }
     
-    func getPersistentContainer(projectName name: String = "CBL") -> NSPersistentContainer? {
+    // MARK: - Core Data stack
+    lazy var persistentContainer: NSPersistentContainer? = {
+        return newPersistentContainer()
+    }()
+    
+    func newPersistentContainer(projectName name: String = "CBL") -> NSPersistentContainer? {
         return NSPersistentContainer(name: name)
     }
     
     func getContext(projectName name: String = "CBL") throws -> NSManagedObjectContext {
-        let persistentContainer: NSPersistentContainer? = getPersistentContainer(projectName: name)
-        if persistentContainer == nil { throw CoreDataManagerErrors.nilContainer }
+        if name != "CBL" { throw CoreDataManagerErrors.invalidContextForName }
         return persistentContainer!.viewContext
     }
     
     // MARK: - Core Data Saving support
     func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
+        do {
+            let context = try getContext()
+            if context.hasChanges {
                 try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        } catch let error as NSError {
+            print("Error saving context. \(error), \(error.userInfo)")
         }
     }
     
@@ -57,10 +62,11 @@ class CoreDataManager : NSObject {
         let request = NSBatchDeleteRequest(fetchRequest: fetch)
         
         do {
-            try self.persistentContainer.viewContext.execute(request)
-            try self.persistentContainer.viewContext.save()
-        } catch {
-            print("Error")
+            let context = try getContext()
+            try context.execute(request)
+            try context.save()
+        } catch let error as NSError {
+            print("Error deleting data. \(error), \(error.userInfo)")
         }
     }
     
@@ -68,7 +74,8 @@ class CoreDataManager : NSObject {
         let request = NSFetchRequest<NSManagedObject>(entityName: name)
         var results = [NSManagedObject]()
         do {
-            results = try self.persistentContainer.viewContext.fetch(request)
+            let context = try getContext()
+            results = try context.fetch(request)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
