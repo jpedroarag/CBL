@@ -10,7 +10,6 @@ import CoreData
 
 class CoreDataManager : NSObject {
     static var shared = CoreDataManager()
-    public var projectName = "CBL"
     
     enum CoreDataManagerErrors : Error {
         case nilContainer
@@ -27,17 +26,15 @@ class CoreDataManager : NSObject {
     
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: projectName)
-//        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-//            if let error = error as NSError? {
-//                fatalError("Unresolved error \(error), \(error.userInfo)")
-//            }
-//        })
-        return container
-    }()
+        return getPersistentContainer()
+        }()!
     
-    func getContext() throws -> NSManagedObjectContext {
-        let persistentContainer: NSPersistentContainer? = self.persistentContainer
+    func getPersistentContainer(projectName name: String = "CBL") -> NSPersistentContainer? {
+        return NSPersistentContainer(name: name)
+    }
+    
+    func getContext(projectName name: String = "CBL") throws -> NSManagedObjectContext {
+        let persistentContainer: NSPersistentContainer? = getPersistentContainer(projectName: name)
         if persistentContainer == nil { throw CoreDataManagerErrors.nilContainer }
         return persistentContainer!.viewContext
     }

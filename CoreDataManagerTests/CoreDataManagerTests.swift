@@ -13,7 +13,6 @@ import CoreData
 class CoreDataManagerTests: XCTestCase {
     
     var coreData: CoreDataManager!
-    let projectName = (success: "CBL", fail: "Erro induzido")
     
     override func setUp() {
         super.setUp()
@@ -21,25 +20,19 @@ class CoreDataManagerTests: XCTestCase {
     }
     
     func test_persistentContainer_success() {
-        coreData.projectName = projectName.success
-        let container = coreData.persistentContainer
-        XCTAssertNotNil(container)
+        XCTAssertNotNil(coreData.getPersistentContainer())
     }
-    
+
     func test_persistentContainer_fail() {
-        coreData.projectName = projectName.fail
-        let container: NSPersistentContainer? = coreData.persistentContainer
-        XCTAssertNil(container)
+        XCTAssertNil(coreData.getPersistentContainer(projectName: "Erro induzido"))
     }
     
     func test_getContext_success() {
-        coreData.projectName = projectName.success
         XCTAssertEqual(coreData.persistentContainer.viewContext, try coreData.getContext())
     }
     
     func test_getContext_fail() {
-        coreData.projectName = projectName.fail
-        XCTAssertThrowsError(try coreData.getContext())
+        XCTAssertThrowsError(try coreData.getContext(projectName: "Erro induzido"))
     }
     
     override func tearDown() {
