@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		BE0A83092138184A00E6FDFF /* CBLsTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE0A83082138184900E6FDFF /* CBLsTable.storyboard */; };
 		BE0A830B2138185700E6FDFF /* CBLsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */; };
+		BE0A830D2138243C00E6FDFF /* EssentialOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A830C2138243C00E6FDFF /* EssentialOverViewController.swift */; };
+		BE0A830F213825A900E6FDFF /* GuidingOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A830E213825A900E6FDFF /* GuidingOverViewController.swift */; };
+		BE0A83112138260100E6FDFF /* SynthesisOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A83102138260100E6FDFF /* SynthesisOverViewController.swift */; };
+		BE0A83132138263000E6FDFF /* SolutionOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A83122138263000E6FDFF /* SolutionOverViewController.swift */; };
+		BE0A83152138266A00E6FDFF /* CBLOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A83142138266A00E6FDFF /* CBLOverViewController.swift */; };
 		BE1AC3772136C6CC009083A4 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
 		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
@@ -54,6 +59,11 @@
 /* Begin PBXFileReference section */
 		BE0A83082138184900E6FDFF /* CBLsTable.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLsTable.storyboard; sourceTree = "<group>"; };
 		BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBLsTableViewController.swift; sourceTree = "<group>"; };
+		BE0A830C2138243C00E6FDFF /* EssentialOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialOverViewController.swift; sourceTree = "<group>"; };
+		BE0A830E213825A900E6FDFF /* GuidingOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidingOverViewController.swift; sourceTree = "<group>"; };
+		BE0A83102138260100E6FDFF /* SynthesisOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthesisOverViewController.swift; sourceTree = "<group>"; };
+		BE0A83122138263000E6FDFF /* SolutionOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionOverViewController.swift; sourceTree = "<group>"; };
+		BE0A83142138266A00E6FDFF /* CBLOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBLOverViewController.swift; sourceTree = "<group>"; };
 		BE1AC3742136C6CC009083A4 /* CoreDataManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		BE1AC3782136C6CC009083A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +149,11 @@
 			isa = PBXGroup;
 			children = (
 				BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */,
+				BE0A830C2138243C00E6FDFF /* EssentialOverViewController.swift */,
+				BE0A830E213825A900E6FDFF /* GuidingOverViewController.swift */,
+				BE0A83102138260100E6FDFF /* SynthesisOverViewController.swift */,
+				BE0A83122138263000E6FDFF /* SolutionOverViewController.swift */,
+				BE0A83142138266A00E6FDFF /* CBLOverViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -377,6 +392,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF814F42135970900501E13 /* ViewController.swift in Sources */,
+				BE0A83132138263000E6FDFF /* SolutionOverViewController.swift in Sources */,
+				BE0A830D2138243C00E6FDFF /* EssentialOverViewController.swift in Sources */,
+				BE0A830F213825A900E6FDFF /* GuidingOverViewController.swift in Sources */,
+				BE0A83152138266A00E6FDFF /* CBLOverViewController.swift in Sources */,
+				BE0A83112138260100E6FDFF /* SynthesisOverViewController.swift in Sources */,
 				BEF814F22135970900501E13 /* AppDelegate.swift in Sources */,
 				BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */,
 				BEF814FA2135970900501E13 /* CBL.xcdatamodeld in Sources */,
