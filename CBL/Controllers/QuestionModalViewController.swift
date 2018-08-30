@@ -33,15 +33,11 @@ class QuestionModalViewController: UIViewController {
     }
     
     private func verifyTextFieldsForSaving() throws {
-        let question = questionTextField.text
-        let activities = activityTextField.text
-        let resources = resourcesTextField.text
-        let answer = answerTextView.text
-        
-        if question == "" { throw TextFieldError.emptyTextField }
-        if activities == "" { throw TextFieldError.emptyTextField }
-        if resources == "" { throw TextFieldError.emptyTextField }
-        if answer == "" { throw TextFieldError.emptyTextField }
+        if questionTextField.text == "" { throw TextFieldError.emptyTextField }
+        if activityTextField.text == ""
+            && questionType == .guiding { throw TextFieldError.emptyTextField }
+        if resourcesTextField.text == "" { throw TextFieldError.emptyTextField }
+        if answerTextView.text == "" { throw TextFieldError.emptyTextField }
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
@@ -61,7 +57,6 @@ class QuestionModalViewController: UIViewController {
                 print("Error getting the context. \(error) \(error.userInfo)")
             }
             
-            
             switch questionType {
             case .essential:
                 let questionEntityDescription = NSEntityDescription.entity(forEntityName: "EssentialQuestion", in: context)
@@ -79,13 +74,9 @@ class QuestionModalViewController: UIViewController {
                 guidingQuestion.answer = answer
             }
             
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("Error saving the context. \(error) \(error.userInfo)")
-            }
-            
+            CoreDataManager.shared.saveContext()
             dismiss()
+            
         } catch let error {
             let textFieldError = error as? TextFieldError
             let alertErrorMessage = (textFieldError != nil) ? (textFieldError?.localizedDescription)! : error.localizedDescription

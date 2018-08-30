@@ -21,6 +21,7 @@ class CoreDataManager : NSObject {
                 return "Persistent container is nil"
             case .invalidContextForName:
                 return "Invalid context for given name"
+            
             }
         }
     }
@@ -37,7 +38,13 @@ class CoreDataManager : NSObject {
     }()
     
     func newPersistentContainer(projectName name: String = "CBL") -> NSPersistentContainer? {
-        return NSPersistentContainer(name: name)
+        let container = NSPersistentContainer(name: name)
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                print("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
     }
     
     func getContext(projectName name: String = "CBL") throws -> NSManagedObjectContext {
