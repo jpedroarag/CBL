@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		BE1AC3772136C6CC009083A4 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
+		BED4579421380C910033ECE5 /* CBLsTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579321380C900033ECE5 /* CBLsTable.storyboard */; };
+		BED4579621380CB50033ECE5 /* CBLsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED4579521380CB50033ECE5 /* CBLsTableViewController.swift */; };
+		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
+		BED4579A21380D7D0033ECE5 /* CBLOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */; };
+		BED4579C21380DCC0033ECE5 /* EssentialOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579B21380DCC0033ECE5 /* EssentialOverView.storyboard */; };
+		BED4579E21380F480033ECE5 /* GuidingOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579D21380F480033ECE5 /* GuidingOverView.storyboard */; };
+		BED457A021380F720033ECE5 /* SynthesisOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579F21380F720033ECE5 /* SynthesisOverView.storyboard */; };
+		BED457A221380F970033ECE5 /* SolutionOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED457A121380F970033ECE5 /* SolutionOverView.storyboard */; };
 		BEF814F22135970900501E13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF814F12135970900501E13 /* AppDelegate.swift */; };
 		BEF814F42135970900501E13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF814F32135970900501E13 /* ViewController.swift */; };
 		BEF814F72135970900501E13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEF814F52135970900501E13 /* Main.storyboard */; };
@@ -48,6 +56,14 @@
 		BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		BE1AC3782136C6CC009083A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		BED4579321380C900033ECE5 /* CBLsTable.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CBLsTable.storyboard; path = ../../../../TemporaryTableView/TemporaryTableView/CBLsTable.storyboard; sourceTree = "<group>"; };
+		BED4579521380CB50033ECE5 /* CBLsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CBLsTableViewController.swift; path = ../../../../TemporaryTableView/TemporaryTableView/CBLsTableViewController.swift; sourceTree = "<group>"; };
+		BED4579721380CEE0033ECE5 /* NewCBL.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCBL.storyboard; sourceTree = "<group>"; };
+		BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLOverView.storyboard; sourceTree = "<group>"; };
+		BED4579B21380DCC0033ECE5 /* EssentialOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EssentialOverView.storyboard; sourceTree = "<group>"; };
+		BED4579D21380F480033ECE5 /* GuidingOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GuidingOverView.storyboard; sourceTree = "<group>"; };
+		BED4579F21380F720033ECE5 /* SynthesisOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SynthesisOverView.storyboard; sourceTree = "<group>"; };
+		BED457A121380F970033ECE5 /* SolutionOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SolutionOverView.storyboard; sourceTree = "<group>"; };
 		BEF814EE2135970900501E13 /* CBL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEF814F12135970900501E13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEF814F32135970900501E13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +121,28 @@
 			path = CoreDataManagerTests;
 			sourceTree = "<group>";
 		};
+		BED4579121380C510033ECE5 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				BED4579321380C900033ECE5 /* CBLsTable.storyboard */,
+				BED4579721380CEE0033ECE5 /* NewCBL.storyboard */,
+				BED457A121380F970033ECE5 /* SolutionOverView.storyboard */,
+				BED4579F21380F720033ECE5 /* SynthesisOverView.storyboard */,
+				BED4579D21380F480033ECE5 /* GuidingOverView.storyboard */,
+				BED4579B21380DCC0033ECE5 /* EssentialOverView.storyboard */,
+				BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		BED4579221380C730033ECE5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BED4579521380CB50033ECE5 /* CBLsTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		BEF814E52135970900501E13 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +168,8 @@
 		BEF814F02135970900501E13 /* CBL */ = {
 			isa = PBXGroup;
 			children = (
+				BED4579221380C730033ECE5 /* Controllers */,
+				BED4579121380C510033ECE5 /* StoryBoards */,
 				BEF814F12135970900501E13 /* AppDelegate.swift */,
 				BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */,
 				BEF814F32135970900501E13 /* ViewController.swift */,
@@ -295,8 +335,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF814FF2135970A00501E13 /* LaunchScreen.storyboard in Resources */,
+				BED4579A21380D7D0033ECE5 /* CBLOverView.storyboard in Resources */,
+				BED457A221380F970033ECE5 /* SolutionOverView.storyboard in Resources */,
 				BEF814FC2135970A00501E13 /* Assets.xcassets in Resources */,
+				BED4579C21380DCC0033ECE5 /* EssentialOverView.storyboard in Resources */,
 				BEF814F72135970900501E13 /* Main.storyboard in Resources */,
+				BED457A021380F720033ECE5 /* SynthesisOverView.storyboard in Resources */,
+				BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */,
+				BED4579421380C910033ECE5 /* CBLsTable.storyboard in Resources */,
+				BED4579E21380F480033ECE5 /* GuidingOverView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +380,7 @@
 				BEF814F22135970900501E13 /* AppDelegate.swift in Sources */,
 				BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */,
 				BEF814FA2135970900501E13 /* CBL.xcdatamodeld in Sources */,
+				BED4579621380CB50033ECE5 /* CBLsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +599,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
+				DEVELOPMENT_TEAM = JGG8YW8SJU;
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -569,7 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
+				DEVELOPMENT_TEAM = JGG8YW8SJU;
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
