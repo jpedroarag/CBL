@@ -32,50 +32,70 @@ class QuestionModalViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
+    private func verifyTextFieldsForSaving() throws {
         let question = questionTextField.text
         let activities = activityTextField.text
         let resources = resourcesTextField.text
         let answer = answerTextView.text
         
-        if question == "" { return }
-        if activities == "" { return }
-        if resources == "" { return }
-        if answer == "" { return }
-        
-        var context: NSManagedObjectContext!
-        
+        if question == "" { throw TextFieldError.emptyTextField }
+        if activities == "" { throw TextFieldError.emptyTextField }
+        if resources == "" { throw TextFieldError.emptyTextField }
+        if answer == "" { throw TextFieldError.emptyTextField }
+    }
+    
+    @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
         do {
-            context = try CoreDataManager.shared.getContext()
-        } catch let error as NSError {
-            print("Error getting the context. \(error) \(error.userInfo)")
-        }
-        
-        
-        switch questionType {
-        case .essential:
-            let questionEntityDescription = NSEntityDescription.entity(forEntityName: "EssentialQuestion", in: context)
-            let essentialQuestion = EssentialQuestion(entity: questionEntityDescription!, insertInto: context)
-            essentialQuestion.question = question
-            essentialQuestion.resources = resources
-            essentialQuestion.answer = answer
             
-        case .guiding:
-            let questionEntityDescription = NSEntityDescription.entity(forEntityName: "GuidingQuestion", in: context)
-            let guidingQuestion = GuidingQuestion(entity: questionEntityDescription!, insertInto: context)
-            guidingQuestion.question = question
-            guidingQuestion.activities = activities
-            guidingQuestion.resources = resources
-            guidingQuestion.answer = answer
+            try verifyTextFieldsForSaving()
+            let question = questionTextField.text
+            let activities = activityTextField.text
+            let resources = resourcesTextField.text
+            let answer = answerTextView.text
+            
+            var context: NSManagedObjectContext!
+            
+            do {
+                context = try CoreDataManager.shared.getContext()
+            } catch let error as NSError {
+                print("Error getting the context. \(error) \(error.userInfo)")
+            }
+            
+            
+            switch questionType {
+            case .essential:
+                let questionEntityDescription = NSEntityDescription.entity(forEntityName: "EssentialQuestion", in: context)
+                let essentialQuestion = EssentialQuestion(entity: questionEntityDescription!, insertInto: context)
+                essentialQuestion.question = question
+                essentialQuestion.resources = resources
+                essentialQuestion.answer = answer
+                
+            case .guiding:
+                let questionEntityDescription = NSEntityDescription.entity(forEntityName: "GuidingQuestion", in: context)
+                let guidingQuestion = GuidingQuestion(entity: questionEntityDescription!, insertInto: context)
+                guidingQuestion.question = question
+                guidingQuestion.activities = activities
+                guidingQuestion.resources = resources
+                guidingQuestion.answer = answer
+            }
+            
+            do {
+                try context.save()
+            } catch let error as NSError {
+                print("Error saving the context. \(error) \(error.userInfo)")
+            }
+            
+            dismiss()
+        } catch let error {
+            let textFieldError = error as? TextFieldError
+            let alertErrorMessage = (textFieldError != nil) ? (textFieldError?.localizedDescription)! : error.localizedDescription
+            
+            let alert = UIAlertController(title: "Error", message: alertErrorMessage, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okButton)
+            
+            present(alert, animated: true, completion: nil)
         }
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Error saving the context. \(error) \(error.userInfo)")
-        }
-        
-        dismiss()
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {

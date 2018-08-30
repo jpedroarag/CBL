@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TextFieldErrors : Error {
+enum TextFieldError : Error {
     case emptyTextField
     
     var localizedDescription: String {
