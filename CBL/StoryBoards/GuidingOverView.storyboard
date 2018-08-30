@@ -22,10 +22,21 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="p0T-rt-1EE"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="4mq-vg-Hxm" kind="presentation" identifier="newGuidingQuestion" id="4Ot-Wk-EYU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VCU-6W-BCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-429" y="983"/>
+        </scene>
+        <!--QuestionModal-->
+        <scene sceneID="tdo-NH-TBc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="QuestionModal" id="4mq-vg-Hxm" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c3J-6J-ra9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="527" y="982"/>
         </scene>
     </scenes>
 </document>

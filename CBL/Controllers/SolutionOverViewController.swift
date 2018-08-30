@@ -17,6 +17,7 @@ class SolutionOverViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
          self.navigationController?.navigationBar.topItem?.title = "Solution"
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

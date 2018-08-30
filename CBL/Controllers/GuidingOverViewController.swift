@@ -17,10 +17,18 @@ class GuidingOverViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Guiding Questions"
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuestion(_ :)))
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = button
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as? UINavigationController
+        let target = destination?.topViewController as? QuestionModalViewController
+        target?.questionType = .guiding
+    }
+    
+    @objc func addQuestion(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "newGuidingQuestion", sender: nil)
     }
     
 

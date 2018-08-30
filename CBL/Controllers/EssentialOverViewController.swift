@@ -19,13 +19,15 @@ class EssentialOverViewController: UIViewController {
         let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuestion(_ :)))
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = button
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination as? UINavigationController
+        let target = destination?.topViewController as? QuestionModalViewController
+        target?.questionType = .essential
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
-        print("funcionou")
+        performSegue(withIdentifier: "newEssentialQuestion", sender: nil)
     }
     
 }

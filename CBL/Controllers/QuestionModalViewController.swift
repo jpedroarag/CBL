@@ -33,10 +33,15 @@ class QuestionModalViewController: UIViewController {
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
-        guard let question = questionTextField.text else { return }
-        guard let activities = activityTextField.text else { return }
-        guard let resources = resourcesTextField.text else { return }
-        guard let answer = answerTextView.text else { return }
+        let question = questionTextField.text
+        let activities = activityTextField.text
+        let resources = resourcesTextField.text
+        let answer = answerTextView.text
+        
+        if question == "" { return }
+        if activities == "" { return }
+        if resources == "" { return }
+        if answer == "" { return }
         
         var context: NSManagedObjectContext!
         

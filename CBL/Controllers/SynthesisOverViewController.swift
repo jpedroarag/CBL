@@ -22,7 +22,8 @@ class SynthesisOverViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-          self.navigationController?.navigationBar.topItem?.title = "Synthesis"
+        self.navigationController?.navigationBar.topItem?.title = "Synthesis"
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
  
 }

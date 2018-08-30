@@ -17,6 +17,7 @@ class CBLOverViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
          self.navigationController?.navigationBar.topItem?.title = "CBL"
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
