@@ -34,9 +34,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rvu-pX-PXK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rvu-pX-PXK">
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cblCell" textLabel="Dld-Dk-WiK" style="IBUITableViewCellStyleDefault" id="h2w-2L-jdH">
@@ -60,6 +59,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Rvu-pX-PXK" firstAttribute="bottom" secondItem="yNb-eu-WS1" secondAttribute="bottom" id="9Fy-JP-Nh2"/>
+                            <constraint firstAttribute="trailing" secondItem="Rvu-pX-PXK" secondAttribute="trailing" id="MyB-sZ-Xdc"/>
+                            <constraint firstItem="Rvu-pX-PXK" firstAttribute="leading" secondItem="Lfo-1P-8wW" secondAttribute="leading" id="VvD-kK-kra"/>
+                            <constraint firstItem="Rvu-pX-PXK" firstAttribute="top" secondItem="yNb-eu-WS1" secondAttribute="top" id="fIc-U6-2x0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="yNb-eu-WS1"/>
                     </view>
                     <navigationItem key="navigationItem" title="CBL" leftItemsSupplementBackButton="YES" id="F58-cB-n8d">
