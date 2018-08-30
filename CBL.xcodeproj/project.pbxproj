@@ -10,6 +10,8 @@
 		BE0A83092138184A00E6FDFF /* CBLsTable.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE0A83082138184900E6FDFF /* CBLsTable.storyboard */; };
 		BE0A830B2138185700E6FDFF /* CBLsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */; };
 		BE1AC3772136C6CC009083A4 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */; };
+		BE3A15CD213823E700EE1591 /* QuestionModal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3A15CC213823E700EE1591 /* QuestionModal.storyboard */; };
+		BE3A15CF213828CD00EE1591 /* QuestionModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15CE213828CD00EE1591 /* QuestionModalViewController.swift */; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
 		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
 		BED4579A21380D7D0033ECE5 /* CBLOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */; };
@@ -57,6 +59,8 @@
 		BE1AC3742136C6CC009083A4 /* CoreDataManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		BE1AC3782136C6CC009083A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE3A15CC213823E700EE1591 /* QuestionModal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuestionModal.storyboard; sourceTree = "<group>"; };
+		BE3A15CE213828CD00EE1591 /* QuestionModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModalViewController.swift; sourceTree = "<group>"; };
 		BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BED4579721380CEE0033ECE5 /* NewCBL.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCBL.storyboard; sourceTree = "<group>"; };
 		BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLOverView.storyboard; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 				BED4579D21380F480033ECE5 /* GuidingOverView.storyboard */,
 				BED4579B21380DCC0033ECE5 /* EssentialOverView.storyboard */,
 				BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */,
+				BE3A15CC213823E700EE1591 /* QuestionModal.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */,
+				BE3A15CE213828CD00EE1591 /* QuestionModalViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -344,6 +350,7 @@
 				BED457A021380F720033ECE5 /* SynthesisOverView.storyboard in Resources */,
 				BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */,
 				BED4579E21380F480033ECE5 /* GuidingOverView.storyboard in Resources */,
+				BE3A15CD213823E700EE1591 /* QuestionModal.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +387,7 @@
 				BEF814F22135970900501E13 /* AppDelegate.swift in Sources */,
 				BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */,
 				BEF814FA2135970900501E13 /* CBL.xcdatamodeld in Sources */,
+				BE3A15CF213828CD00EE1591 /* QuestionModalViewController.swift in Sources */,
 				BE0A830B2138185700E6FDFF /* CBLsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

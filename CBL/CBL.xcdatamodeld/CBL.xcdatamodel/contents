@@ -13,6 +13,7 @@
     <entity name="EssentialQuestion" representedClassName="EssentialQuestion" syncable="YES" codeGenerationType="class">
         <attribute name="answer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="question" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resources" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="engage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Engage" inverseName="essentialQuestions" inverseEntity="Engage" syncable="YES"/>
     </entity>
     <entity name="GuidingQuestion" representedClassName="GuidingQuestion" syncable="YES" codeGenerationType="class">
@@ -31,8 +32,8 @@
     <elements>
         <element name="CBL" positionX="-504" positionY="-10" width="128" height="73"/>
         <element name="Engage" positionX="-522" positionY="153" width="128" height="103"/>
-        <element name="Investigate" positionX="-209" positionY="153" width="128" height="103"/>
-        <element name="EssentialQuestion" positionX="-504" positionY="396" width="128" height="90"/>
+        <element name="EssentialQuestion" positionX="-504" positionY="396" width="128" height="105"/>
         <element name="GuidingQuestion" positionX="-218" positionY="399" width="128" height="118"/>
+        <element name="Investigate" positionX="-209" positionY="153" width="128" height="103"/>
     </elements>
 </model>
