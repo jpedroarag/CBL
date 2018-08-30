@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Over View Controller-->
         <scene sceneID="4Dz-g3-0Jt">
             <objects>
-                <viewController id="ccj-lt-59t" sceneMemberID="viewController">
+                <viewController id="ccj-lt-59t" customClass="CBLOverViewController" customModule="CBL" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z3H-k7-OSn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
