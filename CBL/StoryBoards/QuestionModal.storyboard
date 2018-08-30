@@ -31,8 +31,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ra-H2-6WN">
-                                <rect key="frame" x="16" y="176" width="57" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ra-H2-6WN">
+                                <rect key="frame" x="16" y="176" width="70" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -99,9 +99,22 @@
                     <navigationItem key="navigationItem" title="New Question" id="7om-u5-72n">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Tc-Jb-6Me">
                             <color key="tintColor" red="1" green="0.29083591190000002" blue="0.2330350112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="cancel:" destination="p5c-8e-6aB" id="Pln-i2-dlc"/>
+                            </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="F0b-OO-fka"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="F0b-OO-fka">
+                            <connections>
+                                <action selector="saveQuestion:" destination="p5c-8e-6aB" id="7Xl-NP-XOZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityTextField" destination="xgD-JL-akQ" id="4Bc-Dh-KGZ"/>
+                        <outlet property="answerTextView" destination="scd-9U-VB3" id="Mcn-qW-XZQ"/>
+                        <outlet property="questionTextField" destination="7Z5-dM-OQQ" id="aUL-4c-gd7"/>
+                        <outlet property="resourcesTextField" destination="W04-hw-eGv" id="hK3-qD-Vmd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EwG-mM-bjp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -123,7 +136,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E3m-Td-SDG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-591" y="144"/>
+            <point key="canvasLocation" x="-554" y="144"/>
         </scene>
     </scenes>
 </document>

@@ -12,18 +12,20 @@ class EssentialOverViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Essential Questions"
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuestion(_ :)))
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = button
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    @objc func addQuestion(_ sender: UIBarButtonItem) {
+        print("funcionou")
+    }
     
-
 }
