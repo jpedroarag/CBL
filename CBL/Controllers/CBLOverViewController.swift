@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CBLOverViewController: UIViewController {
 
@@ -15,15 +16,26 @@ class CBLOverViewController: UIViewController {
     @IBOutlet weak var challengeLabel: UILabel!
     @IBOutlet weak var solutionLabel: UILabel!
     
-    var CBL: CBL?
+    var engage: Engage?
+    var investigate: Investigate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        do {
+            let context = try CoreDataManager.shared.getContext()
+            let engageEntity = NSEntityDescription.entity(forEntityName: "Engage", in: context)
+            let investigateEntity = NSEntityDescription.entity(forEntityName: "Investigate", in: context)
+            
+            engage = Engage(entity: engageEntity!, insertInto: context)
+            investigate = Investigate(entity: investigateEntity!, insertInto: context)
+            
+        } catch let error {
+            NSLog(error.localizedDescription)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-         self.navigationController?.navigationBar.topItem?.title = "Overview"
+        self.navigationController?.navigationBar.topItem?.title = "Overview"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
 
