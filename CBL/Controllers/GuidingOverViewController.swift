@@ -20,9 +20,15 @@ class GuidingOverViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
+        
         self.navigationController?.navigationBar.topItem?.title = "Guiding Questions"
         let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addQuestion(_ :)))
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = button
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "blueApp")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -48,7 +54,24 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
         return cell!
         
     }
-    
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            print("Celula deletada")
+        }
+        deleteAction.backgroundColor = UIColor(named: "redApp")
+        
+        let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
+            print("Celula editada")
+        }
+        editAction.backgroundColor = UIColor(named: "blueApp")
+        
+        let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
+            print("Celula respondida")
+        }
+        answerAction.backgroundColor = UIColor(named: "greenApp")
+        return [deleteAction, editAction, answerAction]
+    }
     
 }
 extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDelegate{

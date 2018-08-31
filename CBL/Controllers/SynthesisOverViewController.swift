@@ -28,6 +28,11 @@ class SynthesisOverViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Synthesis"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "blueApp")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
  
 }

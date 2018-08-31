@@ -16,8 +16,13 @@ class SolutionOverViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-         self.navigationController?.navigationBar.topItem?.title = "Solution"
+        self.navigationController?.navigationBar.topItem?.title = "Solution"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
+       
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "greenApp")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

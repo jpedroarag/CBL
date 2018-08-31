@@ -51,13 +51,14 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6xY-im-HjI"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="history" id="3bq-8Z-AHF"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="haf-4D-gh6" kind="presentation" identifier="newEssentialQuestion" id="sBk-IW-wrD"/>
                         <outlet property="tableView" destination="CS4-Ef-I5w" id="0NZ-rL-ny5"/>
+                        <segue destination="haf-4D-gh6" kind="presentation" identifier="newEssentialQuestion" id="sBk-IW-wrD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUv-lt-QS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
