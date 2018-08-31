@@ -29,8 +29,7 @@ class GuidingOverViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let questions = CoreDataManager.shared.getObjects(forEntity: "GuidingQuestion") as? [GuidingQuestion]
-        if questions != nil { guidingQuestions = questions! }
+        guidingQuestions = CoreDataManager.shared.getObjects(forEntity: "GuidingQuestion") as? [GuidingQuestion] ?? [GuidingQuestion]()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -21,8 +21,7 @@ class EssentialOverViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let questions = CoreDataManager.shared.getObjects(forEntity: "EssentialQuestion") as? [EssentialQuestion]
-        if questions != nil { essentialQuestions = questions! }
+        essentialQuestions = CoreDataManager.shared.getObjects(forEntity: "EssentialQuestion") as? [EssentialQuestion] ?? [EssentialQuestion]()
     }
 
     override func viewDidAppear(_ animated: Bool) {
