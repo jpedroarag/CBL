@@ -15,6 +15,8 @@ class GuidingOverViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -40,4 +42,13 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     
+}
+extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDelegate{
+    public func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator){
+        
+    }
+    public func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]{
+        return []
+    }
+
 }

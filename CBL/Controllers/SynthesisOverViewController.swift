@@ -10,9 +10,13 @@ import UIKit
 
 class SynthesisOverViewController: UIViewController {
 
+    @IBOutlet weak var textAreaSynthesis: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        textAreaSynthesis.layer.borderWidth = 3
+        textAreaSynthesis.layer.borderColor = UIColor.gray.cgColor
+        textAreaSynthesis.layer.cornerRadius = 14
+        
         // Do any additional setup after loading the view.
     }
 
