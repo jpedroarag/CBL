@@ -10,8 +10,14 @@ import UIKit
 
 class EssentialOverViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+     
+        // Do any additional setup after loading the view.
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -29,5 +35,17 @@ class EssentialOverViewController: UIViewController {
     @objc func addQuestion(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "newEssentialQuestion", sender: nil)
     }
+
+}
+extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        cell?.textLabel?.text = "Porque existimos?"
+        cell?.detailTextLabel?.text = "Para sofrer"
+        return cell!
+    }
 }
