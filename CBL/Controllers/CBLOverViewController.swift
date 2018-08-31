@@ -10,29 +10,21 @@ import UIKit
 
 class CBLOverViewController: UIViewController {
 
+    @IBOutlet weak var bigIdeaTextField: UITextField!
+    @IBOutlet weak var equipeTextField: UITextField!
+    @IBOutlet weak var challengeLabel: UILabel!
+    @IBOutlet weak var solutionLabel: UILabel!
+    
+    var CBL: CBL?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         // Do any additional setup after loading the view.
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-         self.navigationController?.navigationBar.topItem?.title = "CBL"
+         self.navigationController?.navigationBar.topItem?.title = "Overview"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
