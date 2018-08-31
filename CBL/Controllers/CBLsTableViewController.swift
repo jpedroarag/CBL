@@ -26,6 +26,12 @@ class CBLsTableViewController: UIViewController {
         cbls = CoreDataManager.shared.getObjects(forEntity: "CBL") as? [CBL] ?? [CBL]()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dest = segue.destination as? UITabBarController
+        let target = dest?.selectedViewController as? CBLOverViewController
+        target?.delegate = self
+    }
+    
 
 }
 extension CBLsTableViewController: UITableViewDelegate, UITableViewDataSource{
@@ -33,11 +39,22 @@ extension CBLsTableViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cbls.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cblCell")!
-        //cell.textLabel?.text = cbls[indexPath.row].bigIdea!
+        cell.textLabel?.text = cbls[indexPath.row].engage?.bigIdea
         return cell
-        
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "addCbl", sender: nil)
+    }
+    
+}
+
+extension CBLsTableViewController : NewCblDelegate {
+    func addCbl(_ cbl: CBL) {
+        self.cbls.append(cbl)
+        self.tableView.reloadData()
+    }
 }

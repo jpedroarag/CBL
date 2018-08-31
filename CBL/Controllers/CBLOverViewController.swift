@@ -17,6 +17,7 @@ class CBLOverViewController: UIViewController {
     @IBOutlet weak var solutionLabel: UILabel!
     
     var cbl: CBL?
+    var delegate: NewCblDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,15 @@ class CBLOverViewController: UIViewController {
             cbl = CBL(entity: cblEntity!, insertInto: context)
             cbl?.engage = Engage(entity: engageEntity!, insertInto: context)
             cbl?.investigate = Investigate(entity: investigateEntity!, insertInto: context)
+            
+            let c = self.tabBarController?.viewControllers![1] as? EssentialOverViewController
+            c?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
+            
+            let d = self.tabBarController?.viewControllers![2] as? GuidingOverViewController
+            d?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
+            
+
+            CoreDataManager.shared.saveContext(context)
             
         } catch let error {
             NSLog(error.localizedDescription)

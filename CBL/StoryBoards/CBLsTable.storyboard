@@ -70,7 +70,7 @@
                     <navigationItem key="navigationItem" title="CBL" leftItemsSupplementBackButton="YES" id="F58-cB-n8d">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="h17-UA-omj">
                             <connections>
-                                <segue destination="2MY-cQ-yF2" kind="show" id="Ykg-wm-xU7"/>
+                                <segue destination="2MY-cQ-yF2" kind="show" identifier="addCbl" id="Ykg-wm-xU7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
