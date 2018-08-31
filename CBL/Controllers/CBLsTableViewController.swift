@@ -21,6 +21,11 @@ class CBLsTableViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cbls = CoreDataManager.shared.getObjects(forEntity: "CBL") as? [CBL] ?? [CBL]()
+    }
+    
 
 }
 extension CBLsTableViewController: UITableViewDelegate, UITableViewDataSource{
