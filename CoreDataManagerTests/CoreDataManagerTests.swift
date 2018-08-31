@@ -21,11 +21,11 @@ class CoreDataManagerTests: XCTestCase {
     }
     
     func test_nilContainerLocalized() {
-        XCTAssertEqual(CoreDataManager.CoreDataManagerErrors.nilContainer.localizedDescription, "Persistent container is nil")
+        XCTAssertEqual(CoreDataManager.CoreDataManagerError.nilContainer.localizedDescription, "Persistent container is nil")
     }
     
     func test_invalidContextForName() {
-        XCTAssertEqual(CoreDataManager.CoreDataManagerErrors.invalidContextForName.localizedDescription, "Invalid context for given name")
+        XCTAssertEqual(CoreDataManager.CoreDataManagerError.invalidContextForName.localizedDescription, "Invalid context for given name")
     }
     
     func test_persistentContainer_success() {

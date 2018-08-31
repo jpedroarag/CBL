@@ -11,21 +11,6 @@ import CoreData
 class CoreDataManager : NSObject {
     static var shared = CoreDataManager()
     
-    enum CoreDataManagerErrors : Error {
-        case nilContainer
-        case invalidContextForName
-        
-        var localizedDescription : String {
-            switch self {
-            case .nilContainer:
-                return "Persistent container is nil"
-            case .invalidContextForName:
-                return "Invalid context for given name"
-            
-            }
-        }
-    }
-    
     private override init() {}
     
     func resetSingleton() {
@@ -34,21 +19,26 @@ class CoreDataManager : NSObject {
     
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer? = {
-        return newPersistentContainer()
+        let container = try? newPersistentContainer()
+        return container
     }()
     
-    func newPersistentContainer(projectName name: String = "CBL") -> NSPersistentContainer? {
+    func newPersistentContainer(projectName name: String = "CBL") throws -> NSPersistentContainer {
         let container = NSPersistentContainer(name: name)
+        var havePersistentStoresError = false
+        
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo)")
-            }
+            if (error as NSError?) != nil { havePersistentStoresError = true }
         })
+        
+        if havePersistentStoresError { throw CoreDataManagerError.persistentStoresLoadError }
+        if name != "CBL" { throw CoreDataManagerError.nilContainer }
+        
         return container
     }
     
     func getContext(projectName name: String = "CBL") throws -> NSManagedObjectContext {
-        if name != "CBL" { throw CoreDataManagerErrors.invalidContextForName }
+        if name != "CBL" { throw CoreDataManagerError.invalidContextForName }
         return persistentContainer!.viewContext
     }
     
