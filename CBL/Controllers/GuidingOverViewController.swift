@@ -91,7 +91,7 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
         editAction.backgroundColor = UIColor(named: "blueApp")
         
         let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
-            print("Celula respondida")
+            self.performSegue(withIdentifier: "newGuidingQuestion", sender: self.guidingQuestions[indexPath.row])
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]

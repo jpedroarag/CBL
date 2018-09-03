@@ -86,7 +86,7 @@ extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegat
         editAction.backgroundColor = UIColor(named: "blueApp")
         
         let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
-            print("Celula respondida")
+            self.performSegue(withIdentifier: "newEssentialQuestion", sender: self.essentialQuestions[indexPath.row])
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]
