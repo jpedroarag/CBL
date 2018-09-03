@@ -11,21 +11,33 @@ import UIKit
 class SynthesisOverViewController: UIViewController {
 
     @IBOutlet weak var textAreaSynthesis: UITextView!
+   
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewSizeConstraint: NSLayoutConstraint!
+    
+    var numberOfLines: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textAreaSynthesis.layer.borderWidth = 3
-        textAreaSynthesis.layer.borderColor = UIColor.gray.cgColor
-        textAreaSynthesis.layer.cornerRadius = 14
+//        textAreaSynthesis.layer.borderWidth = 3
+//        textAreaSynthesis.layer.borderColor = UIColor.gray.cgColor
+//        textAreaSynthesis.layer.cornerRadius = 14
         
         // Do any additional setup after loading the view.
+        
+        
+        textAreaSynthesis.delegate = self
+        
+        
+        //Set placeholder for textView
+        if textAreaSynthesis.text == ""{
+            textAreaSynthesis.textColor = UIColor.lightGray
+            textAreaSynthesis.text = "Type what you learn"
+        }
+        
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Synthesis"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
@@ -36,4 +48,26 @@ class SynthesisOverViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
  
+}
+extension SynthesisOverViewController: UITextViewDelegate{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray{
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let numLines = (textAreaSynthesis.contentSize.height / (textAreaSynthesis.font?.lineHeight)!)
+        let fontSize = textAreaSynthesis.font?.pointSize
+        
+        print(numLines)
+        if numberOfLines < Int(numLines){
+            numberOfLines = Int(numLines)
+            
+            textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+        }
+        
+        return true
+    }
 }

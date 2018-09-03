@@ -18,21 +18,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GeV-HH-Tzj">
-                                <rect key="frame" x="16" y="144" width="343" height="439"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GeV-HH-Tzj">
+                                <rect key="frame" x="16" y="99" width="343" height="68"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="kgL-pe-5BR"/>
+                                </constraints>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQi-LE-77U">
+                                <rect key="frame" x="28" y="45" width="34" height="93"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="79"/>
+                                <color key="textColor" red="0.79600529019999999" green="0.79607843140000001" blue="0.79161595289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="”" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5bz-iW-jJR">
+                                <rect key="frame" x="314" y="198" width="34" height="92.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="79"/>
+                                <color key="textColor" red="0.79600529019999999" green="0.79607843140000001" blue="0.79161595289999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GeV-HH-Tzj" firstAttribute="top" secondItem="ak5-5a-Lyg" secondAttribute="top" constant="79" id="4oT-0v-yaC"/>
+                            <constraint firstItem="fQi-LE-77U" firstAttribute="leading" secondItem="ak5-5a-Lyg" secondAttribute="leading" constant="28" id="Kli-1n-H8N"/>
+                            <constraint firstItem="ak5-5a-Lyg" firstAttribute="trailing" secondItem="GeV-HH-Tzj" secondAttribute="trailing" constant="16" id="OuI-Uc-tl6"/>
+                            <constraint firstItem="5bz-iW-jJR" firstAttribute="top" secondItem="GeV-HH-Tzj" secondAttribute="bottom" constant="31" id="ZSt-Vl-7ee"/>
+                            <constraint firstItem="ak5-5a-Lyg" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="GeV-HH-Tzj" secondAttribute="bottom" constant="451" id="grG-gz-LZx"/>
+                            <constraint firstItem="fQi-LE-77U" firstAttribute="top" secondItem="ak5-5a-Lyg" secondAttribute="top" constant="25" id="vU4-xb-4SE"/>
+                            <constraint firstItem="ak5-5a-Lyg" firstAttribute="trailing" secondItem="5bz-iW-jJR" secondAttribute="trailing" constant="27" id="wKQ-xm-vI7"/>
+                            <constraint firstItem="GeV-HH-Tzj" firstAttribute="leading" secondItem="ak5-5a-Lyg" secondAttribute="leading" constant="16" id="yPb-vN-YS8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ak5-5a-Lyg"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="mostViewed" id="UIb-wL-EEN"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="textAreaSynthesis" destination="GeV-HH-Tzj" id="H3K-P7-Trb"/>
+                        <outlet property="textViewHeightConstraint" destination="grG-gz-LZx" id="mTy-tL-puN"/>
+                        <outlet property="textViewSizeConstraint" destination="kgL-pe-5BR" id="mgc-dt-SHE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lff-UQ-6O7" userLabel="First Responder" sceneMemberID="firstResponder"/>
