@@ -11,6 +11,7 @@ import UIKit
 class SynthesisOverViewController: UIViewController {
 
     @IBOutlet weak var textAreaSynthesis: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textAreaSynthesis.layer.borderWidth = 3

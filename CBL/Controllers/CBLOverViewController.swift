@@ -31,17 +31,21 @@ class CBLOverViewController: UIViewController {
             cbl?.engage = Engage(entity: engageEntity!, insertInto: context)
             cbl?.investigate = Investigate(entity: investigateEntity!, insertInto: context)
             
-            let c = self.tabBarController?.viewControllers![1] as? EssentialOverViewController
-            c?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
+            let tabBarControllers = self.tabBarController?.viewControllers!
             
-            let d = self.tabBarController?.viewControllers![2] as? GuidingOverViewController
-            d?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
+            let essentialController = tabBarControllers![1] as? EssentialOverViewController
+            let guidingController = tabBarControllers![2] as? GuidingOverViewController
+//            let synthesisController = tabBarControllers![3] as? SynthesisOverViewController
+//            let solutionController = tabBarControllers![4] as? SolutionOverViewController
             
-
+            essentialController?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
+            guidingController?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
+//            synthesisController?.textAreaSynthesis.text = cbl?.investigate?.researchSynthesis
+            
             CoreDataManager.shared.saveContext(context)
             
         } catch let error {
-            NSLog(error.localizedDescription)
+            NSLog("There was an error. Error description: '\(error.localizedDescription)'")
         }
     }
     
