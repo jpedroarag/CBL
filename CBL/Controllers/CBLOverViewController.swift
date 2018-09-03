@@ -26,48 +26,32 @@ class CBLOverViewController: UIViewController {
         bigIdeaTextField.addTarget(self, action: #selector(bigIdeaTextFieldDidChange(_ :)), for: .editingChanged)
         equipeTextField.addTarget(self, action: #selector(teamTextFieldDidChange(_ :)), for: .editingChanged)
         
-        do {
-            if cbl == nil {
-                let context = try CoreDataManager.shared.getContext()
-                let cblEntity = NSEntityDescription.entity(forEntityName: "CBL", in: context)
-                let engageEntity = NSEntityDescription.entity(forEntityName: "Engage", in: context)
-                let investigateEntity = NSEntityDescription.entity(forEntityName: "Investigate", in: context)
-                
-                cbl = CBL(entity: cblEntity!, insertInto: context)
-                cbl?.engage = Engage(entity: engageEntity!, insertInto: context)
-                cbl?.investigate = Investigate(entity: investigateEntity!, insertInto: context)
-                
-            } else {
-                if let bigIdea = cbl?.engage?.bigIdea,
-//                   let date = cbl?.date,
-                   let team = cbl?.team {
-                    
-                    self.bigIdeaTextField.text = bigIdea
-                    self.equipeTextField.text = team
-                    
-//                    let dateFormatter = DateFormatter()
-//                    dateFormatter.dateStyle = .short
-//
-//                    self.dateTextField.text = dateFormatter.string(from: date)
-                }
-            }
-            
-            let tabBarControllers = self.tabBarController?.viewControllers!
-            
-            let essentialController = tabBarControllers![1] as? EssentialOverViewController
-            let guidingController = tabBarControllers![2] as? GuidingOverViewController
-             let synthesisController = tabBarControllers![3] as? SynthesisOverViewController
-            // let solutionController = tabBarControllers![4] as? SolutionOverViewController
-            
-            essentialController?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
-            guidingController?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
-            synthesisController?.text = cbl?.investigate?.researchSynthesis
-            
-            CoreDataManager.shared.saveContext()
-            delegate?.saveCbl(cbl!)
-            
-        } catch let error {
-            NSLog("There was an error. Error description: '\(error.localizedDescription)'")
+        setTextFieldsTexts()
+        
+        let tabBarControllers = self.tabBarController?.viewControllers!
+        
+        let essentialController = tabBarControllers![1] as? EssentialOverViewController
+        let guidingController = tabBarControllers![2] as? GuidingOverViewController
+        let synthesisController = tabBarControllers![3] as? SynthesisOverViewController
+        // let solutionController = tabBarControllers![4] as? SolutionOverViewController
+        
+        essentialController?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
+        guidingController?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
+        synthesisController?.text = cbl?.investigate?.researchSynthesis
+    }
+    
+    private func setTextFieldsTexts() {
+        bigIdeaTextField.text = cbl?.engage?.bigIdea ?? ""
+        equipeTextField.text = cbl?.team ?? ""
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.locale = Locale(identifier: "pt-br")
+        
+        if let date = cbl?.date {
+            dateTextField.text = dateFormatter.string(from: date)
+        } else {
+            dateTextField.text = dateFormatter.string(from: Date(timeIntervalSinceNow: 0))
         }
     }
     

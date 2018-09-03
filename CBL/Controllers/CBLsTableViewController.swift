@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CBLsTableViewController: UIViewController {
 
@@ -42,8 +43,25 @@ class CBLsTableViewController: UIViewController {
         let target = tabBarControllers![0] as? CBLOverViewController
         target?.delegate = self
         
-        if let object = sender as? CBL {
-            target?.cbl = object
+        do {
+            let cbl: CBL
+            if let cblObj = sender as? CBL {
+                cbl = cblObj
+            } else {
+                let context = try CoreDataManager.shared.getContext()
+                let cblEntity = NSEntityDescription.entity(forEntityName: "CBL", in: context)
+                let engageEntity = NSEntityDescription.entity(forEntityName: "Engage", in: context)
+                let investigateEntity = NSEntityDescription.entity(forEntityName: "Investigate", in: context)
+                
+                cbl = CBL(entity: cblEntity!, insertInto: context)
+                cbl.engage = Engage(entity: engageEntity!, insertInto: context)
+                cbl.investigate = Investigate(entity: investigateEntity!, insertInto: context)
+            }
+            
+            target?.cbl = cbl
+            
+        } catch let error {
+            NSLog("There was an error. Error description: '\(error.localizedDescription)'")
         }
     }
 
