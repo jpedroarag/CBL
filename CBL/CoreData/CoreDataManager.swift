@@ -43,11 +43,12 @@ class CoreDataManager : NSObject {
     }
     
     // MARK: - Core Data Saving support
-    func saveContext () {
+    func saveContext (_ givenContext: NSManagedObjectContext? = nil) {
         do {
-            let context = try getContext()
-            if context.hasChanges {
-                try context.save()
+            var context = givenContext
+            if context == nil { context = try getContext() }
+            if (context?.hasChanges)! {
+                try context?.save()
             }
         } catch let error as NSError {
             print("Error saving context. \(error), \(error.userInfo)")

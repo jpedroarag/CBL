@@ -10,15 +10,17 @@ import UIKit
 
 class GuidingOverViewController: UIViewController {
 
+    var guidingQuestions = [GuidingQuestion]()
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
-        // Do any additional setup after loading the view.
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         self.navigationController?.navigationBar.topItem?.title = "Guiding Questions"
@@ -31,10 +33,16 @@ class GuidingOverViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guidingQuestions = CoreDataManager.shared.getObjects(forEntity: "GuidingQuestion") as? [GuidingQuestion] ?? [GuidingQuestion]()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? UINavigationController
         let target = destination?.topViewController as? QuestionModalViewController
         target?.questionType = .guiding
+        target?.delegate = self
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
@@ -44,13 +52,19 @@ class GuidingOverViewController: UIViewController {
 }
 extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return guidingQuestions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = "Por que estudamos?"
-        cell?.detailTextLabel?.text = "Para um pedreiro ganhar mais que a gente"
+        let questionObject = guidingQuestions[indexPath.row]
+        cell?.textLabel?.text = questionObject.question
+        
+        if questionObject.answer == "" {
+            cell?.detailTextLabel?.text = questionObject.activities ?? ""
+        } else {
+            cell?.detailTextLabel?.text = questionObject.answer ?? ""
+        }
         return cell!
         
     }
@@ -82,4 +96,11 @@ extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDel
         return []
     }
 
+}
+
+extension GuidingOverViewController : NewQuestionDelegate {
+    func addGuidingQuestion(_ question: GuidingQuestion) {
+        self.guidingQuestions.append(question)
+        self.tableView.reloadData()
+    }
 }

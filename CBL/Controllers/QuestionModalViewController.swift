@@ -17,6 +17,7 @@ class QuestionModalViewController: UIViewController {
     @IBOutlet weak var answerTextView: UITextView!
     
     var questionType = QuestionType.essential
+    var delegate: NewQuestionDelegate?
     
     enum QuestionType {
         case essential
@@ -34,10 +35,6 @@ class QuestionModalViewController: UIViewController {
     
     private func verifyTextFieldsForSaving() throws {
         if questionTextField.text == "" { throw TextFieldError.emptyTextField }
-        if activityTextField.text == ""
-            && questionType == .guiding { throw TextFieldError.emptyTextField }
-        if resourcesTextField.text == "" { throw TextFieldError.emptyTextField }
-        if answerTextView.text == "" { throw TextFieldError.emptyTextField }
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
@@ -64,6 +61,7 @@ class QuestionModalViewController: UIViewController {
                 essentialQuestion.question = question
                 essentialQuestion.resources = resources
                 essentialQuestion.answer = answer
+                delegate?.addEssentialQuestion!(essentialQuestion)
                 
             case .guiding:
                 let questionEntityDescription = NSEntityDescription.entity(forEntityName: "GuidingQuestion", in: context)
@@ -72,6 +70,7 @@ class QuestionModalViewController: UIViewController {
                 guidingQuestion.activities = activities
                 guidingQuestion.resources = resources
                 guidingQuestion.answer = answer
+                delegate?.addGuidingQuestion!(guidingQuestion)
             }
             
             CoreDataManager.shared.saveContext()

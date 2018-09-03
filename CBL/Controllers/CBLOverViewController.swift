@@ -7,16 +7,51 @@
 //
 
 import UIKit
+import CoreData
 
 class CBLOverViewController: UIViewController {
 
+    @IBOutlet weak var bigIdeaTextField: UITextField!
+    @IBOutlet weak var equipeTextField: UITextField!
+    @IBOutlet weak var challengeLabel: UILabel!
+    @IBOutlet weak var solutionLabel: UILabel!
+    
+    var cbl: CBL?
+    var delegate: NewCblDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        // Do any additional setup after loading the view.
+        do {
+            let context = try CoreDataManager.shared.getContext()
+            let cblEntity = NSEntityDescription.entity(forEntityName: "CBL", in: context)
+            let engageEntity = NSEntityDescription.entity(forEntityName: "Engage", in: context)
+            let investigateEntity = NSEntityDescription.entity(forEntityName: "Investigate", in: context)
+            
+            cbl = CBL(entity: cblEntity!, insertInto: context)
+            cbl?.engage = Engage(entity: engageEntity!, insertInto: context)
+            cbl?.investigate = Investigate(entity: investigateEntity!, insertInto: context)
+            
+            let tabBarControllers = self.tabBarController?.viewControllers!
+            
+            let essentialController = tabBarControllers![1] as? EssentialOverViewController
+            let guidingController = tabBarControllers![2] as? GuidingOverViewController
+//            let synthesisController = tabBarControllers![3] as? SynthesisOverViewController
+//            let solutionController = tabBarControllers![4] as? SolutionOverViewController
+            
+            essentialController?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
+            guidingController?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
+//            synthesisController?.textAreaSynthesis.text = cbl?.investigate?.researchSynthesis
+            
+            CoreDataManager.shared.saveContext(context)
+            
+        } catch let error {
+            NSLog("There was an error. Error description: '\(error.localizedDescription)'")
+        }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = "CBL Overview"
+        self.navigationController?.navigationBar.topItem?.title = "Overview"
+
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
         
         
@@ -25,20 +60,5 @@ class CBLOverViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

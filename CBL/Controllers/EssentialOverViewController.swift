@@ -9,15 +9,19 @@
 import UIKit
 import Foundation
 class EssentialOverViewController: UIViewController {
-
+    
+    var essentialQuestions = [EssentialQuestion]()
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
-     
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        essentialQuestions = CoreDataManager.shared.getObjects(forEntity: "EssentialQuestion") as? [EssentialQuestion] ?? [EssentialQuestion]()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -36,6 +40,7 @@ class EssentialOverViewController: UIViewController {
         let destination = segue.destination as? UINavigationController
         let target = destination?.topViewController as? QuestionModalViewController
         target?.questionType = .essential
+        target?.delegate = self
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
@@ -45,13 +50,20 @@ class EssentialOverViewController: UIViewController {
 }
 extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return essentialQuestions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = "Porque existimos?"
-        cell?.detailTextLabel?.text = "Para sofrer"
+        let questionObject = essentialQuestions[indexPath.row]
+        cell?.textLabel?.text = questionObject.question
+        
+        if questionObject.answer == "" {
+            cell?.detailTextLabel?.text = questionObject.resources ?? ""
+        } else {
+            cell?.detailTextLabel?.text = questionObject.answer ?? ""
+        }
+        
         return cell!
     }
 
@@ -71,5 +83,12 @@ extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegat
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]
+    }
+}
+
+extension EssentialOverViewController : NewQuestionDelegate {
+    func addEssentialQuestion(_ question: EssentialQuestion) {
+        self.essentialQuestions.append(question)
+        self.tableView.reloadData()
     }
 }
