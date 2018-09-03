@@ -11,19 +11,20 @@ import UIKit
 class SynthesisOverViewController: UIViewController {
 
     @IBOutlet weak var textAreaSynthesis: UITextView!
+    var text: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        textAreaSynthesis.delegate = self
+        
         textAreaSynthesis.layer.borderWidth = 3
         textAreaSynthesis.layer.borderColor = UIColor.gray.cgColor
         textAreaSynthesis.layer.cornerRadius = 14
         
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        if let text = text {
+            self.textAreaSynthesis.text = text
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,4 +37,13 @@ class SynthesisOverViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
  
+}
+
+extension SynthesisOverViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        self.text = textView.text
+        let cblOverViewVC = tabBarController?.viewControllers![0] as? CBLOverViewController
+        cblOverViewVC?.cbl?.investigate?.researchSynthesis = self.text
+        CoreDataManager.shared.saveContext()
+    }
 }

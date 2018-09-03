@@ -21,17 +21,31 @@ class CBLsTableViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.blue
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cbls = CoreDataManager.shared.getObjects(forEntity: "CBL") as? [CBL] ?? [CBL]()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dest = segue.destination as? UITabBarController
-        let target = dest?.selectedViewController as? CBLOverViewController
+        let tabBarControllers = dest?.viewControllers!
+        let target = tabBarControllers![0] as? CBLOverViewController
         target?.delegate = self
+        
+        if let object = sender as? CBL {
+            target?.cbl = object
+        }
     }
-    
 
 }
 extension CBLsTableViewController: UITableViewDelegate, UITableViewDataSource{
@@ -47,14 +61,32 @@ extension CBLsTableViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "addCbl", sender: nil)
+        self.performSegue(withIdentifier: "addCbl", sender: self.cbls[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
+            CoreDataManager.shared.deleteObject(self.cbls[indexPath.row])
+            self.cbls.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .left)
+        }
+        deleteAction.backgroundColor = UIColor(named: "redApp")
+        
+        let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
+            self.performSegue(withIdentifier: "addCbl", sender: self.cbls[indexPath.row])
+        }
+        editAction.backgroundColor = UIColor(named: "blueApp")
+        
+        return [deleteAction, editAction]
     }
     
 }
 
 extension CBLsTableViewController : NewCblDelegate {
-    func addCbl(_ cbl: CBL) {
-        self.cbls.append(cbl)
+    func saveCbl(_ cbl: CBL) {
+        if !cbls.contains(cbl) {
+            self.cbls.append(cbl)
+        }
         self.tableView.reloadData()
     }
 }

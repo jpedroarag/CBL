@@ -14,7 +14,7 @@ enum TextFieldError : Error {
     var localizedDescription: String {
         switch self {
         case .emptyTextField:
-            return "There is some empty text field"
+            return "Question text field is empty!"
         }
     }
 }

@@ -55,6 +55,16 @@ class CoreDataManager : NSObject {
         }
     }
     
+    func deleteObject(_ object: NSManagedObject) {
+        do {
+            let context = try getContext()
+            context.delete(object)
+            try context.save()
+        } catch let error as NSError {
+            print("Error deleting object. \(error), \(error.userInfo)")
+        }
+    }
+    
     func deleteDataFrom(entity name: String) {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: name)
         let request = NSBatchDeleteRequest(fetchRequest: fetch)

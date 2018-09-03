@@ -43,6 +43,10 @@ class GuidingOverViewController: UIViewController {
         let target = destination?.topViewController as? QuestionModalViewController
         target?.questionType = .guiding
         target?.delegate = self
+        
+        if let object = sender as? GuidingQuestion {
+            target?.editingObject = object
+        }
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
@@ -68,15 +72,21 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
         return cell!
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "newGuidingQuestion", sender: guidingQuestions[indexPath.row])
+    }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
-            print("Celula deletada")
+            CoreDataManager.shared.deleteObject(self.guidingQuestions[indexPath.row])
+            self.guidingQuestions.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .left)
         }
         deleteAction.backgroundColor = UIColor(named: "redApp")
         
         let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
-            print("Celula editada")
+            self.performSegue(withIdentifier: "newGuidingQuestion", sender: self.guidingQuestions[indexPath.row])
         }
         editAction.backgroundColor = UIColor(named: "blueApp")
         
@@ -99,8 +109,10 @@ extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDel
 }
 
 extension GuidingOverViewController : NewQuestionDelegate {
-    func addGuidingQuestion(_ question: GuidingQuestion) {
-        self.guidingQuestions.append(question)
+    func saveGuidingQuestion(_ question: GuidingQuestion) {
+        if !guidingQuestions.contains(question) {
+            self.guidingQuestions.append(question)
+        }
         self.tableView.reloadData()
     }
 }

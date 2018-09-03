@@ -18,6 +18,7 @@ class QuestionModalViewController: UIViewController {
     
     var questionType = QuestionType.essential
     var delegate: NewQuestionDelegate?
+    var editingObject: NSManagedObject?
     
     enum QuestionType {
         case essential
@@ -26,51 +27,98 @@ class QuestionModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setEditingObject()
+    }
+    
+    func setEditingObject() {
+        guard let object = editingObject else { return }
         
+        let question: String
+        let resources: String
+        let answer: String
+        
+        switch questionType {
+        case .essential:
+            let essential = object as? EssentialQuestion
+            question = (essential?.question)!
+            resources = (essential?.resources)!
+            answer = (essential?.answer)!
+            
+        case .guiding:
+            let guiding = object as? GuidingQuestion
+            question = (guiding?.question)!
+            resources = (guiding?.resources)!
+            answer = (guiding?.answer)!
+            activityTextField.text = (guiding?.activities)!
+            
+        }
+        
+        questionTextField.text = question
+        resourcesTextField.text = resources
+        answerTextView.text = answer
     }
 
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func verifyTextFieldsForSaving() throws {
+    private func verifyTextFieldsBeforeSaving() throws {
         if questionTextField.text == "" { throw TextFieldError.emptyTextField }
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
         do {
             
-            try verifyTextFieldsForSaving()
+            try verifyTextFieldsBeforeSaving()
             let question = questionTextField.text
             let activities = activityTextField.text
             let resources = resourcesTextField.text
             let answer = answerTextView.text
             
-            var context: NSManagedObjectContext!
             
-            do {
-                context = try CoreDataManager.shared.getContext()
-            } catch let error as NSError {
-                print("Error getting the context. \(error) \(error.userInfo)")
-            }
-            
-            switch questionType {
-            case .essential:
-                let questionEntityDescription = NSEntityDescription.entity(forEntityName: "EssentialQuestion", in: context)
-                let essentialQuestion = EssentialQuestion(entity: questionEntityDescription!, insertInto: context)
-                essentialQuestion.question = question
-                essentialQuestion.resources = resources
-                essentialQuestion.answer = answer
-                delegate?.addEssentialQuestion!(essentialQuestion)
+            if editingObject == nil {
+                var context: NSManagedObjectContext!
                 
-            case .guiding:
-                let questionEntityDescription = NSEntityDescription.entity(forEntityName: "GuidingQuestion", in: context)
-                let guidingQuestion = GuidingQuestion(entity: questionEntityDescription!, insertInto: context)
-                guidingQuestion.question = question
-                guidingQuestion.activities = activities
-                guidingQuestion.resources = resources
-                guidingQuestion.answer = answer
-                delegate?.addGuidingQuestion!(guidingQuestion)
+                do {
+                    context = try CoreDataManager.shared.getContext()
+                } catch let error as NSError {
+                    print("Error getting the context. \(error) \(error.userInfo)")
+                }
+                
+                switch questionType {
+                case .essential:
+                    let questionEntityDescription = NSEntityDescription.entity(forEntityName: "EssentialQuestion", in: context)
+                    let essentialQuestion = EssentialQuestion(entity: questionEntityDescription!, insertInto: context)
+                    essentialQuestion.question = question
+                    essentialQuestion.resources = resources
+                    essentialQuestion.answer = answer
+                    delegate?.saveEssentialQuestion!(essentialQuestion)
+                    
+                case .guiding:
+                    let questionEntityDescription = NSEntityDescription.entity(forEntityName: "GuidingQuestion", in: context)
+                    let guidingQuestion = GuidingQuestion(entity: questionEntityDescription!, insertInto: context)
+                    guidingQuestion.question = question
+                    guidingQuestion.activities = activities
+                    guidingQuestion.resources = resources
+                    guidingQuestion.answer = answer
+                    delegate?.saveGuidingQuestion!(guidingQuestion)
+                }
+                
+            } else {
+                switch self.questionType {
+                case .essential:
+                    let essentialQuestion = self.editingObject as! EssentialQuestion
+                    essentialQuestion.question = question
+                    essentialQuestion.resources = resources
+                    essentialQuestion.answer = answer
+                    
+                case .guiding:
+                    let guidingQuestion = self.editingObject as! GuidingQuestion
+                    guidingQuestion.question = question
+                    guidingQuestion.activities = activities
+                    guidingQuestion.resources = resources
+                    guidingQuestion.answer = answer
+                }
             }
             
             CoreDataManager.shared.saveContext()
