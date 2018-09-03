@@ -28,20 +28,21 @@ class QuestionModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
-        self.view.addGestureRecognizer(gesture)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+        let hideGesture = UISwipeGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
+        hideGesture.direction = .down
+        self.view.addGestureRecognizer(hideGesture)
+        
+        let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_ :)))
+        self.answerTextView.addGestureRecognizer(showGesture)
         
         setEditingObject()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self)
+        super.viewWillDisappear(animated)
     }
     
     func setEditingObject() {
@@ -80,6 +81,11 @@ class QuestionModalViewController: UIViewController {
         if questionTextField.text == "" { throw TextFieldError.emptyTextField }
     }
     
+    @objc func answerTextViewTouched(_ sender: UITapGestureRecognizer) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        answerTextView.becomeFirstResponder()
+    }
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0{
@@ -93,6 +99,7 @@ class QuestionModalViewController: UIViewController {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
             self.answerTextView.endEditing(true)
         }, completion: nil)
+        NotificationCenter.default.removeObserver(self)
 
     }
     
