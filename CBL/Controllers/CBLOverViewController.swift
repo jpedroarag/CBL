@@ -21,6 +21,9 @@ class CBLOverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.tabBarItem.image = #imageLiteral(resourceName: "chalenge")
+        
         do {
             let context = try CoreDataManager.shared.getContext()
             let cblEntity = NSEntityDescription.entity(forEntityName: "CBL", in: context)

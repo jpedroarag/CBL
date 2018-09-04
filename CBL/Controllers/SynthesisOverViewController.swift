@@ -19,15 +19,10 @@ class SynthesisOverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        textAreaSynthesis.layer.borderWidth = 3
-//        textAreaSynthesis.layer.borderColor = UIColor.gray.cgColor
-//        textAreaSynthesis.layer.cornerRadius = 14
-        
-        // Do any additional setup after loading the view.
-        
         
         textAreaSynthesis.delegate = self
         
+//        self.tabBarItem.image = #imageLiteral(resourceName: "synthesis")
         
         //Set placeholder for textView
         if textAreaSynthesis.text == ""{

@@ -13,8 +13,9 @@ class SolutionOverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        // Do any additional setup after loading the view.
+//       tabBarItem.image = #imageLiteral(resourceName: "solution")
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Solution"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil

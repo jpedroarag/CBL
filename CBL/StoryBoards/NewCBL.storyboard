@@ -34,7 +34,7 @@
         <scene sceneID="Igl-X6-9vG">
             <objects>
                 <viewControllerPlaceholder storyboardName="CBLOverView" id="7kV-Cw-ohC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="d1G-4O-5ev"/>
+                    <tabBarItem key="tabBarItem" title="Overview" image="chalenge" selectedImage="challengeFilled" id="d1G-4O-5ev"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2MN-97-and" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -44,7 +44,7 @@
         <scene sceneID="Zqq-zO-FR0">
             <objects>
                 <viewControllerPlaceholder storyboardName="EssentialOverView" id="zh3-D7-Eol" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Ogc-KI-Dcw"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="essential" selectedImage="essential" id="Ogc-KI-Dcw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OUK-vV-5bS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -54,7 +54,7 @@
         <scene sceneID="bnO-Ic-hpU">
             <objects>
                 <viewControllerPlaceholder storyboardName="GuidingOverView" id="m9f-vu-FnJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Mqc-qo-1UP"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="guiding" selectedImage="guiding" id="Mqc-qo-1UP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1tf-xR-b2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,7 +64,7 @@
         <scene sceneID="CAc-Sn-vDx">
             <objects>
                 <viewControllerPlaceholder storyboardName="SynthesisOverView" id="nJc-zW-Ih3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="h0h-kJ-pni"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="synthesis" selectedImage="synthesis" id="h0h-kJ-pni"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Kd-oC-6DV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,11 +74,19 @@
         <scene sceneID="xbE-LQ-cuP">
             <objects>
                 <viewControllerPlaceholder storyboardName="SolutionOverView" id="K9H-BF-ehC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="rEM-Ff-BfC"/>
+                    <tabBarItem key="tabBarItem" title="Item" image="solution" selectedImage="solution" id="rEM-Ff-BfC"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oAG-y7-QpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="755" y="694"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chalenge" width="25" height="25"/>
+        <image name="challengeFilled" width="25" height="25"/>
+        <image name="essential" width="25" height="25"/>
+        <image name="guiding" width="25" height="25"/>
+        <image name="solution" width="25" height="25"/>
+        <image name="synthesis" width="25" height="25"/>
+    </resources>
 </document>

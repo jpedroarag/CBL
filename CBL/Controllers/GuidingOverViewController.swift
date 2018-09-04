@@ -19,6 +19,8 @@ class GuidingOverViewController: UIViewController {
         tableView.dataSource = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
+        
+//        self.tabBarItem.image = #imageLiteral(resourceName: "guiding")
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Essential Over View Controller-->
+        <!--Essential -->
         <scene sceneID="nTt-ZG-60B">
             <objects>
                 <viewController id="MDJ-nd-9gW" customClass="EssentialOverViewController" customModule="CBL" customModuleProvider="target" sceneMemberID="viewController">
@@ -59,7 +59,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6xY-im-HjI"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="3bq-8Z-AHF"/>
+                    <tabBarItem key="tabBarItem" title="Essential " image="essential" selectedImage="essentialFilled" id="3bq-8Z-AHF"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="CS4-Ef-I5w" id="0NZ-rL-ny5"/>
@@ -79,4 +79,8 @@
             <point key="canvasLocation" x="-314" y="979"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="essential" width="25" height="25"/>
+        <image name="essentialFilled" width="25" height="25"/>
+    </resources>
 </document>

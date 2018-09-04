@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Solution Over View Controller-->
+        <!--Solution-->
         <scene sceneID="mjK-2N-pjP">
             <objects>
                 <viewController id="5nV-nf-Cmr" customClass="SolutionOverViewController" customModule="CBL" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,7 +20,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="9WP-4h-uX3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="downloads" id="zf0-kR-Weu"/>
+                    <tabBarItem key="tabBarItem" title="Solution" image="solution" selectedImage="solutionFilled" id="zf0-kR-Weu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIc-Gi-2SI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -28,4 +28,8 @@
             <point key="canvasLocation" x="1081" y="1003"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="solution" width="25" height="25"/>
+        <image name="solutionFilled" width="25" height="25"/>
+    </resources>
 </document>

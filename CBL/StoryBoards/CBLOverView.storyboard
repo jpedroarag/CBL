@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Over View Controller-->
+        <!--CBL-->
         <scene sceneID="4Dz-g3-0Jt">
             <objects>
                 <viewController id="ccj-lt-59t" customClass="CBLOverViewController" customModule="CBL" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,7 +43,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Solution" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ev-8A-Wmz">
-                                <rect key="frame" x="16" y="318" width="343" height="21"/>
+                                <rect key="frame" x="16" y="318" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -68,7 +68,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aMU-fF-c8q"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="nBe-bO-z4s"/>
+                    <tabBarItem key="tabBarItem" title="CBL" image="chalenge" selectedImage="challengeFilled" id="nBe-bO-z4s"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bigIdeaTextField" destination="b6t-uM-7SV" id="OCi-sd-nqM"/>
@@ -82,4 +82,8 @@
             <point key="canvasLocation" x="-1810.4000000000001" y="979.16041979010504"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="chalenge" width="25" height="25"/>
+        <image name="challengeFilled" width="25" height="25"/>
+    </resources>
 </document>

@@ -17,6 +17,8 @@ class EssentialOverViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        self.tabBarItem.image = #imageLiteral(resourceName: "essential")
     }
     
     override func viewWillAppear(_ animated: Bool) {

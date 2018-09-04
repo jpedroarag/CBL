@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Synthesis Over View Controller-->
+        <!--Synthesis-->
         <scene sceneID="WAz-3E-FZS">
             <objects>
                 <viewController id="BcE-Xc-cfT" customClass="SynthesisOverViewController" customModule="CBL" customModuleProvider="target" sceneMemberID="viewController">
@@ -54,7 +54,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ak5-5a-Lyg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="UIb-wL-EEN"/>
+                    <tabBarItem key="tabBarItem" title="Synthesis" image="synthesis" selectedImage="synthesisFilled" id="UIb-wL-EEN"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="textAreaSynthesis" destination="GeV-HH-Tzj" id="H3K-P7-Trb"/>
@@ -67,4 +67,8 @@
             <point key="canvasLocation" x="253.59999999999999" y="986.35682158920542"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="synthesis" width="25" height="25"/>
+        <image name="synthesisFilled" width="25" height="25"/>
+    </resources>
 </document>
