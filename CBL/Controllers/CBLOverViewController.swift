@@ -36,7 +36,7 @@ class CBLOverViewController: UIViewController {
         // let solutionController = tabBarControllers![4] as? SolutionOverViewController
         
         essentialController?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
-        guidingController?.guidingQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [GuidingQuestion]
+        guidingController?.guidingQuestions = (cbl?.investigate?.guidingQuestions)?.allObjects as! [GuidingQuestion]
         synthesisController?.text = cbl?.investigate?.researchSynthesis
     }
     
@@ -56,9 +56,11 @@ class CBLOverViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         self.navigationController?.navigationBar.topItem?.title = "Overview"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
-        
+
         self.navigationController?.navigationBar.barTintColor = UIColor(named: "redApp")
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]

@@ -122,6 +122,7 @@ class QuestionModalViewController: UIViewController {
                     print("Error getting the context. \(error) \(error.userInfo)")
                 }
                 
+                
                 switch questionType {
                 case .essential:
                     let questionEntityDescription = NSEntityDescription.entity(forEntityName: "EssentialQuestion", in: context)

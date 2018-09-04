@@ -10,11 +10,16 @@ import UIKit
 
 class GuidingOverViewController: UIViewController {
 
-    var guidingQuestions = [GuidingQuestion]()
+    var guidingQuestions: [GuidingQuestion]!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if guidingQuestions == nil {
+            guidingQuestions = [GuidingQuestion]()
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.dragDelegate = self
@@ -35,7 +40,6 @@ class GuidingOverViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guidingQuestions = CoreDataManager.shared.getObjects(forEntity: "GuidingQuestion") as? [GuidingQuestion] ?? [GuidingQuestion]()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,6 +115,8 @@ extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDel
 extension GuidingOverViewController : NewQuestionDelegate {
     func saveGuidingQuestion(_ question: GuidingQuestion) {
         if !guidingQuestions.contains(question) {
+            let vc = tabBarController?.viewControllers![0] as? CBLOverViewController
+            question.investigate = vc?.cbl?.investigate
             self.guidingQuestions.append(question)
         }
         self.tableView.reloadData()

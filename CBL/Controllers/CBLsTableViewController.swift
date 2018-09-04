@@ -17,24 +17,24 @@ class CBLsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cbls = CoreDataManager.shared.getObjects(forEntity: "CBL") as? [CBL] ?? [CBL]()
+        
         tableView.delegate = self
         tableView.dataSource = self
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.white
-        self.navigationController?.navigationBar.tintColor = UIColor.blue
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.black]
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cbls = CoreDataManager.shared.getObjects(forEntity: "CBL") as? [CBL] ?? [CBL]()
         
+        self.navigationController?.navigationBar.topItem?.title = "CBL"
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.newCbl(_ :)))
+        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = button
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(named: "greenApp")
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -63,6 +63,10 @@ class CBLsTableViewController: UIViewController {
         } catch let error {
             NSLog("There was an error. Error description: '\(error.localizedDescription)'")
         }
+    }
+    
+    @objc func newCbl(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "addCbl", sender: nil)
     }
 
 }

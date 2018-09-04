@@ -10,18 +10,26 @@ import UIKit
 import Foundation
 class EssentialOverViewController: UIViewController {
     
-    var essentialQuestions = [EssentialQuestion]()
+    var essentialQuestions: [EssentialQuestion]!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if essentialQuestions == nil {
+            essentialQuestions = [EssentialQuestion]()
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        essentialQuestions = CoreDataManager.shared.getObjects(forEntity: "EssentialQuestion") as? [EssentialQuestion] ?? [EssentialQuestion]()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let tabBarControllers = tabBarController?.viewControllers!
+        let cblOverViewController = tabBarControllers![0] as? CBLOverViewController
+        cblOverViewController?.cbl?.engage?.essentialQuestions?.addingObjects(from: essentialQuestions)
+        CoreDataManager.shared.saveContext()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -100,6 +108,8 @@ extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegat
 extension EssentialOverViewController : NewQuestionDelegate {
     func saveEssentialQuestion(_ question: EssentialQuestion) {
         if !essentialQuestions.contains(question) {
+            let vc = tabBarController?.viewControllers![0] as? CBLOverViewController
+            question.engage = vc?.cbl?.engage
             self.essentialQuestions.append(question)
         }
         self.tableView.reloadData()
