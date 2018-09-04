@@ -27,12 +27,9 @@ class SynthesisOverViewController: UIViewController {
         //Set placeholder for textView
         if textAreaSynthesis.text == "" {
             textAreaSynthesis.textColor = UIColor.lightGray
-            textAreaSynthesis.text = "Type what you learned"
         }
         
-        if let text = text {
-            self.textAreaSynthesis.text = text
-        }
+        self.textAreaSynthesis.text = text ?? "Type what you learned"
         
         
     }
@@ -67,11 +64,20 @@ extension SynthesisOverViewController: UITextViewDelegate{
         if numberOfLines < Int(numLines){
             numberOfLines = Int(numLines)
             
-            textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+            if let _ = textViewSizeConstraint {
+                textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+            }
         }
         
         return true
 
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.textColor = UIColor.lightGray
+        if textView.text == "" {
+            textView.text = "Type your challenge"
+        }
     }
 
     func textViewDidChange(_ textView: UITextView) {

@@ -113,7 +113,11 @@ extension EssentialOverViewController : NewQuestionDelegate {
             let vc = tabBarController?.viewControllers![0] as? CBLOverViewController
             question.engage = vc?.cbl?.engage
             self.essentialQuestions.append(question)
+        } else {
+            let index = essentialQuestions.index(of: question)
+            essentialQuestions[index!] = question
         }
+        CoreDataManager.shared.saveContext()
         self.tableView.reloadData()
     }
 }

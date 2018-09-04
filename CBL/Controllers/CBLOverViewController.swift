@@ -14,16 +14,36 @@ class CBLOverViewController: UIViewController {
     @IBOutlet weak var bigIdeaTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var equipeTextField: UITextField!
-    @IBOutlet weak var challengeLabel: UILabel!
-    @IBOutlet weak var solutionLabel: UILabel!
+    @IBOutlet weak var challengeTextView: UITextView!
+    
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewSizeConstraint: NSLayoutConstraint!
     
     var cbl: CBL?
     var delegate: NewCblDelegate?
+    var numberOfLines = 0
+    var isChallengeTextViewEditing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.tabBarItem.image = #imageLiteral(resourceName: "chalenge")
 
+        bigIdeaTextField.delegate = self
+        dateTextField.delegate = self
+        equipeTextField.delegate = self
+        challengeTextView.delegate = self
+        
+        // Relativos aos textFields
+        let hideKeyboardTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(hideKeyboardTapGesture)
+        
+        // Relativo ao textView
+        let hideTapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
+        self.view.addGestureRecognizer(hideTapGesture)
+        
+        let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_:)))
+        self.challengeTextView.addGestureRecognizer(showGesture)
+        
         bigIdeaTextField.addTarget(self, action: #selector(bigIdeaTextFieldDidChange(_ :)), for: .editingChanged)
         equipeTextField.addTarget(self, action: #selector(teamTextFieldDidChange(_ :)), for: .editingChanged)
         
@@ -54,6 +74,14 @@ class CBLOverViewController: UIViewController {
         } else {
             dateTextField.text = dateFormatter.string(from: Date(timeIntervalSinceNow: 0))
         }
+        
+        //Set placeholder for challengeTextView
+        if challengeTextView.text == "" {
+            challengeTextView.textColor = UIColor.lightGray
+        }
+        
+        challengeTextView.text = cbl?.engage?.challenge ?? "Type your challenge"
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,9 +101,103 @@ class CBLOverViewController: UIViewController {
         delegate?.saveCbl(cbl!)
     }
     
+    @objc func dateTextFieldDidChange(_ sender: UITextField) {
+        if let dateString = sender.text {
+            let dateFormatter = DateFormatter()
+            cbl?.date = dateFormatter.date(from: dateString)
+        }
+        delegate?.saveCbl(cbl!)
+    }
+    
     @objc func teamTextFieldDidChange(_ sender: UITextField) {
         cbl?.team = sender.text ?? ""
         delegate?.saveCbl(cbl!)
+    }
+    
+    
+    @objc func answerTextViewTouched(_ sender: UITapGestureRecognizer) {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        challengeTextView.becomeFirstResponder()
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            self.challengeTextView.endEditing(true)
+        }, completion: nil)
+        NotificationCenter.default.removeObserver(self)
+        
+    }
+    
+    @objc func dismissKeyboard(_ sender: UIGestureRecognizer) {
+        if sender.state == .ended {
+            UIView.animate(withDuration: 0.5) {
+                if self.bigIdeaTextField.isEditing { self.bigIdeaTextField.endEditing(true) }
+                if self.dateTextField.isEditing { self.dateTextField.endEditing(true) }
+                if self.equipeTextField.isEditing { self.equipeTextField.endEditing(true) }
+                if self.isChallengeTextViewEditing { self.challengeTextView.endEditing(true) }
+            }
+        }
+    }
+    
+}
+
+extension CBLOverViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        UIView.animate(withDuration: 0.5) {
+            textField.endEditing(true)
+        }
+        return true
+    }
+}
+
+extension CBLOverViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isChallengeTextViewEditing = true
+        textView.textColor = UIColor.black
+        
+        if textView.text == "Type your challenge" {
+            textView.text = ""
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let numLines = (challengeTextView.contentSize.height / (challengeTextView.font?.lineHeight)!)
+        let fontSize = challengeTextView.font?.pointSize
+        
+        if numberOfLines < Int(numLines){
+            numberOfLines = Int(numLines)
+            
+            if let _ = textViewSizeConstraint {
+                textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+            }
+        }
+        
+        return true
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.isChallengeTextViewEditing = false
+        textView.textColor = UIColor.lightGray
+        if textView.text == "" {
+            textView.text = "Type your challenge"
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text != "Type your challenge" {
+            cbl?.engage?.challenge = textView.text
+            CoreDataManager.shared.saveContext()
+        }
     }
     
 }

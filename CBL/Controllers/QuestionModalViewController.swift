@@ -16,9 +16,13 @@ class QuestionModalViewController: UIViewController {
     @IBOutlet weak var resourcesTextField: UITextField!
     @IBOutlet weak var answerTextView: UITextView!
     
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textViewSizeConstraint: NSLayoutConstraint!
+    
     var questionType = QuestionType.essential
     var delegate: NewQuestionDelegate?
     var editingObject: NSManagedObject?
+    var numberOfLines = 0
     
     enum QuestionType {
         case essential
@@ -27,22 +31,32 @@ class QuestionModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let hideTapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
-        self.view.addGestureRecognizer(hideTapGesture)
         
-        let hideSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
-        hideSwipeGesture.direction = .down
-        self.view.addGestureRecognizer(hideSwipeGesture)
+        questionTextField.delegate = self
+        activityTextField.delegate = self
+        resourcesTextField.delegate = self
         
-        let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_ :)))
+        answerTextView.delegate = self
+        
+        // Relativos ao textView
+        
+//        let hideTapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
+//        self.view.addGestureRecognizer(hideTapGesture)
+        
+        let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_:)))
         self.answerTextView.addGestureRecognizer(showGesture)
         
+        // Relativos aos textFields
+        let hideKeyboardTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(hideKeyboardTapGesture)
+        
+        if answerTextView.text == "" {
+            answerTextView.textColor = UIColor.lightGray
+            answerTextView.text = "Type your answer"
+        }
+        
+        // Configura a controller para o caso de ter sido chamada para editar um objeto
         setEditingObject()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
     }
     
     func setEditingObject() {
@@ -94,13 +108,23 @@ class QuestionModalViewController: UIViewController {
         }
     }
 
-    @objc func keyboardWillHide(notification: NSNotification) {
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-            self.answerTextView.endEditing(true)
-        }, completion: nil)
-        NotificationCenter.default.removeObserver(self)
-
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+//            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+//            self.answerTextView.endEditing(true)
+//        }, completion: nil)
+//        NotificationCenter.default.removeObserver(self)
+//
+//    }
+    
+    @objc func dismissKeyboard(_ sender: UIGestureRecognizer) {
+        if sender.state == .ended {
+            UIView.animate(withDuration: 0.5) {
+                if self.questionTextField.isEditing { self.questionTextField.endEditing(true) }
+                if self.resourcesTextField.isEditing { self.resourcesTextField.endEditing(true) }
+                if self.activityTextField.isEditing { self.activityTextField.endEditing(true) }
+            }
+        }
     }
     
     @IBAction func saveQuestion(_ sender: UIBarButtonItem) {
@@ -111,7 +135,6 @@ class QuestionModalViewController: UIViewController {
             let activities = activityTextField.text
             let resources = resourcesTextField.text
             let answer = answerTextView.text
-            
             
             if editingObject == nil {
                 var context: NSManagedObjectContext!
@@ -149,6 +172,7 @@ class QuestionModalViewController: UIViewController {
                     essentialQuestion.question = question
                     essentialQuestion.resources = resources
                     essentialQuestion.answer = answer
+                    delegate?.saveEssentialQuestion!(essentialQuestion)
                     
                 case .guiding:
                     let guidingQuestion = self.editingObject as! GuidingQuestion
@@ -156,17 +180,17 @@ class QuestionModalViewController: UIViewController {
                     guidingQuestion.activities = activities
                     guidingQuestion.resources = resources
                     guidingQuestion.answer = answer
+                    delegate?.saveGuidingQuestion!(guidingQuestion)
                 }
             }
             
-            CoreDataManager.shared.saveContext()
             dismiss()
             
         } catch let error {
             let textFieldError = error as? TextFieldError
             let alertErrorMessage = (textFieldError != nil) ? (textFieldError?.localizedDescription)! : error.localizedDescription
             
-            let alert = UIAlertController(title: "Error", message: alertErrorMessage, preferredStyle: .alert)
+            let alert = UIAlertController(title: "Unable to save", message: alertErrorMessage, preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default, handler: nil)
             alert.addAction(okButton)
             
@@ -176,6 +200,76 @@ class QuestionModalViewController: UIViewController {
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss()
+    }
+    
+    func addAccessoryView() -> Void {
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonTapped(button:)))
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolBar.items = [flexibleSpace,doneButton]
+        toolBar.tintColor = navigationController?.navigationBar.barTintColor
+        toolBar.backgroundColor = navigationController?.navigationBar.backgroundColor
+        self.answerTextView.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            self.answerTextView.endEditing(true)
+        }, completion: nil)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+}
+
+extension QuestionModalViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        UIView.animate(withDuration: 0.5) {
+            textField.endEditing(true)
+        }
+        return true
+    }
+}
+
+extension QuestionModalViewController : UITextViewDelegate{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray  {
+            textView.textColor = UIColor.black
+        }
+        
+        if textView.text == "Type your answer" {
+            textView.text = ""
+        }
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.addAccessoryView()
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let numLines = (answerTextView.contentSize.height / (answerTextView.font?.lineHeight)!)
+        let fontSize = answerTextView.font?.pointSize
+        
+        if numberOfLines < Int(numLines){
+            numberOfLines = Int(numLines)
+            
+            if let _ = textViewSizeConstraint {
+                textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+            }
+        }
+        
+        return true
+        
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        textView.textColor = UIColor.lightGray
+        if textView.text == "" {
+            textView.text = "Type your answer"
+        }
     }
     
 }

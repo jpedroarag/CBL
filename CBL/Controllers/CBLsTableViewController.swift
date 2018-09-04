@@ -21,9 +21,6 @@ class CBLsTableViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,7 +107,11 @@ extension CBLsTableViewController : NewCblDelegate {
     func saveCbl(_ cbl: CBL) {
         if !cbls.contains(cbl) {
             self.cbls.append(cbl)
+        } else {
+            let index = cbls.index(of: cbl)
+            cbls[index!] = cbl
         }
+        CoreDataManager.shared.saveContext()
         self.tableView.reloadData()
     }
 }

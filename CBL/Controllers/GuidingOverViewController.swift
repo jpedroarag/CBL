@@ -120,7 +120,11 @@ extension GuidingOverViewController : NewQuestionDelegate {
             let vc = tabBarController?.viewControllers![0] as? CBLOverViewController
             question.investigate = vc?.cbl?.investigate
             self.guidingQuestions.append(question)
+        } else {
+            let index = guidingQuestions.index(of: question)
+            guidingQuestions[index!] = question
         }
+        CoreDataManager.shared.saveContext()
         self.tableView.reloadData()
     }
 }
