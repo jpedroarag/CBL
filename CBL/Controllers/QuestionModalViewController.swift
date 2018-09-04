@@ -27,13 +27,13 @@ class QuestionModalViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let hideTapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
+        self.view.addGestureRecognizer(hideTapGesture)
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        
-        let hideGesture = UISwipeGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
-        hideGesture.direction = .down
-        self.view.addGestureRecognizer(hideGesture)
+        let hideSwipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
+        hideSwipeGesture.direction = .down
+        self.view.addGestureRecognizer(hideSwipeGesture)
         
         let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_ :)))
         self.answerTextView.addGestureRecognizer(showGesture)
