@@ -9,6 +9,6 @@
 import Foundation
 
 @objc protocol NewQuestionDelegate {
-    @objc optional func addEssentialQuestion(_ question: EssentialQuestion)
-    @objc optional func addGuidingQuestion(_ question: GuidingQuestion)
+    @objc optional func saveEssentialQuestion(_ question: EssentialQuestion)
+    @objc optional func saveGuidingQuestion(_ question: GuidingQuestion)
 }

@@ -3,14 +3,14 @@
     <entity name="CBL" representedClassName="CBL" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="team" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="engage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Engage" inverseName="cbl" inverseEntity="Engage" syncable="YES"/>
-        <relationship name="investigate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Investigate" inverseName="cbl" inverseEntity="Investigate" syncable="YES"/>
+        <relationship name="engage" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Engage" inverseName="cbl" inverseEntity="Engage" syncable="YES"/>
+        <relationship name="investigate" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Investigate" inverseName="cbl" inverseEntity="Investigate" syncable="YES"/>
     </entity>
     <entity name="Engage" representedClassName="Engage" syncable="YES" codeGenerationType="class">
         <attribute name="bigIdea" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="challenge" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cbl" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CBL" inverseName="engage" inverseEntity="CBL" syncable="YES"/>
-        <relationship name="essentialQuestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EssentialQuestion" inverseName="engage" inverseEntity="EssentialQuestion" syncable="YES"/>
+        <relationship name="cbl" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CBL" inverseName="engage" inverseEntity="CBL" syncable="YES"/>
+        <relationship name="essentialQuestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="EssentialQuestion" inverseName="engage" inverseEntity="EssentialQuestion" syncable="YES"/>
     </entity>
     <entity name="EssentialQuestion" representedClassName="EssentialQuestion" syncable="YES" codeGenerationType="class">
         <attribute name="answer" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,13 +28,13 @@
     <entity name="Investigate" representedClassName="Investigate" syncable="YES" codeGenerationType="class">
         <attribute name="researchSynthesis" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="solutionConcept" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cbl" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CBL" inverseName="investigate" inverseEntity="CBL" syncable="YES"/>
-        <relationship name="guidingQuestions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GuidingQuestion" inverseName="investigate" inverseEntity="GuidingQuestion" syncable="YES"/>
+        <relationship name="cbl" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CBL" inverseName="investigate" inverseEntity="CBL" syncable="YES"/>
+        <relationship name="guidingQuestions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="GuidingQuestion" inverseName="investigate" inverseEntity="GuidingQuestion" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CBL" positionX="-504" positionY="-10" width="128" height="105"/>
+        <element name="CBL" positionX="-504" positionY="-10" width="128" height="103"/>
         <element name="Engage" positionX="-522" positionY="153" width="128" height="103"/>
-        <element name="EssentialQuestion" positionX="-504" positionY="396" width="128" height="105"/>
+        <element name="EssentialQuestion" positionX="-504" positionY="396" width="128" height="103"/>
         <element name="GuidingQuestion" positionX="-218" positionY="399" width="128" height="118"/>
         <element name="Investigate" positionX="-209" positionY="153" width="128" height="103"/>
     </elements>

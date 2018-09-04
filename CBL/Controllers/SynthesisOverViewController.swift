@@ -11,11 +11,11 @@ import UIKit
 class SynthesisOverViewController: UIViewController {
 
     @IBOutlet weak var textAreaSynthesis: UITextView!
-   
     @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewSizeConstraint: NSLayoutConstraint!
     
     var numberOfLines: Int = 0
+    var text: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +25,18 @@ class SynthesisOverViewController: UIViewController {
 //        self.tabBarItem.image = #imageLiteral(resourceName: "synthesis")
         
         //Set placeholder for textView
-        if textAreaSynthesis.text == ""{
+        if textAreaSynthesis.text == "" {
             textAreaSynthesis.textColor = UIColor.lightGray
-            textAreaSynthesis.text = "Type what you learn"
+            textAreaSynthesis.text = "Type what you learned"
+        }
+        
+        if let text = text {
+            self.textAreaSynthesis.text = text
         }
         
         
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.topItem?.title = "Synthesis"
         self.navigationController?.navigationBar.topItem?.rightBarButtonItem = nil
@@ -44,11 +48,15 @@ class SynthesisOverViewController: UIViewController {
     }
  
 }
+
 extension SynthesisOverViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray{
-            textView.text = nil
+        if textView.textColor == UIColor.lightGray  {
             textView.textColor = UIColor.black
+        }
+        
+        if textView.text == "Type what you learned" {
+            textView.text = ""
         }
     }
     
@@ -56,7 +64,6 @@ extension SynthesisOverViewController: UITextViewDelegate{
         let numLines = (textAreaSynthesis.contentSize.height / (textAreaSynthesis.font?.lineHeight)!)
         let fontSize = textAreaSynthesis.font?.pointSize
         
-        print(numLines)
         if numberOfLines < Int(numLines){
             numberOfLines = Int(numLines)
             
@@ -64,5 +71,14 @@ extension SynthesisOverViewController: UITextViewDelegate{
         }
         
         return true
+
     }
+
+    func textViewDidChange(_ textView: UITextView) {
+        self.text = textView.text
+        let cblOverViewVC = tabBarController?.viewControllers![0] as? CBLOverViewController
+        cblOverViewVC?.cbl?.investigate?.researchSynthesis = self.text
+        CoreDataManager.shared.saveContext()
+    }
+
 }

@@ -10,20 +10,28 @@ import UIKit
 import Foundation
 class EssentialOverViewController: UIViewController {
     
-    var essentialQuestions = [EssentialQuestion]()
+    var essentialQuestions: [EssentialQuestion]!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if essentialQuestions == nil {
+            essentialQuestions = [EssentialQuestion]()
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         
 //        self.tabBarItem.image = #imageLiteral(resourceName: "essential")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        essentialQuestions = CoreDataManager.shared.getObjects(forEntity: "EssentialQuestion") as? [EssentialQuestion] ?? [EssentialQuestion]()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        let tabBarControllers = tabBarController?.viewControllers!
+        let cblOverViewController = tabBarControllers![0] as? CBLOverViewController
+        cblOverViewController?.cbl?.engage?.essentialQuestions?.addingObjects(from: essentialQuestions)
+        CoreDataManager.shared.saveContext()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,6 +51,11 @@ class EssentialOverViewController: UIViewController {
         let target = destination?.topViewController as? QuestionModalViewController
         target?.questionType = .essential
         target?.delegate = self
+        
+        if let element = sender as? EssentialQuestion {
+            target?.editingObject = element
+        }
+        
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
@@ -71,26 +84,36 @@ extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegat
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
-            print("Celula deletada")
+            CoreDataManager.shared.deleteObject(self.essentialQuestions[indexPath.row])
+            self.essentialQuestions.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .left)
         }
         deleteAction.backgroundColor = UIColor(named: "redApp")
         
         let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
-            print("Celula editada")
+            self.performSegue(withIdentifier: "newEssentialQuestion", sender: self.essentialQuestions[indexPath.row])
         }
         editAction.backgroundColor = UIColor(named: "blueApp")
         
         let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
-            print("Celula respondida")
+            self.performSegue(withIdentifier: "newEssentialQuestion", sender: self.essentialQuestions[indexPath.row])
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "newEssentialQuestion", sender: essentialQuestions[indexPath.row])
+    }
 }
 
 extension EssentialOverViewController : NewQuestionDelegate {
-    func addEssentialQuestion(_ question: EssentialQuestion) {
-        self.essentialQuestions.append(question)
+    func saveEssentialQuestion(_ question: EssentialQuestion) {
+        if !essentialQuestions.contains(question) {
+            let vc = tabBarController?.viewControllers![0] as? CBLOverViewController
+            question.engage = vc?.cbl?.engage
+            self.essentialQuestions.append(question)
+        }
         self.tableView.reloadData()
     }
 }

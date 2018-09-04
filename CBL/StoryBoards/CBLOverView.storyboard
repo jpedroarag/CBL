@@ -73,6 +73,7 @@
                     <connections>
                         <outlet property="bigIdeaTextField" destination="b6t-uM-7SV" id="OCi-sd-nqM"/>
                         <outlet property="challengeLabel" destination="hkk-lV-1aK" id="IEw-hj-dSf"/>
+                        <outlet property="dateTextField" destination="ekx-5F-2aB" id="38o-zB-C6F"/>
                         <outlet property="equipeTextField" destination="wcO-WB-Hfv" id="uc7-Dh-2Sz"/>
                         <outlet property="solutionLabel" destination="0Ev-8A-Wmz" id="qnj-Kh-Eno"/>
                     </connections>

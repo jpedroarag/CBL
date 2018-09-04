@@ -10,11 +10,16 @@ import UIKit
 
 class GuidingOverViewController: UIViewController {
 
-    var guidingQuestions = [GuidingQuestion]()
+    var guidingQuestions: [GuidingQuestion]!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if guidingQuestions == nil {
+            guidingQuestions = [GuidingQuestion]()
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.dragDelegate = self
@@ -37,7 +42,6 @@ class GuidingOverViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        guidingQuestions = CoreDataManager.shared.getObjects(forEntity: "GuidingQuestion") as? [GuidingQuestion] ?? [GuidingQuestion]()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,6 +49,10 @@ class GuidingOverViewController: UIViewController {
         let target = destination?.topViewController as? QuestionModalViewController
         target?.questionType = .guiding
         target?.delegate = self
+        
+        if let object = sender as? GuidingQuestion {
+            target?.editingObject = object
+        }
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
@@ -70,20 +78,26 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
         return cell!
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "newGuidingQuestion", sender: guidingQuestions[indexPath.row])
+    }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (action, indexPath) in
-            print("Celula deletada")
+            CoreDataManager.shared.deleteObject(self.guidingQuestions[indexPath.row])
+            self.guidingQuestions.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .left)
         }
         deleteAction.backgroundColor = UIColor(named: "redApp")
         
         let editAction = UITableViewRowAction(style: .default, title: "Edit") { (action, indexPath) in
-            print("Celula editada")
+            self.performSegue(withIdentifier: "newGuidingQuestion", sender: self.guidingQuestions[indexPath.row])
         }
         editAction.backgroundColor = UIColor(named: "blueApp")
         
         let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
-            print("Celula respondida")
+            self.performSegue(withIdentifier: "newGuidingQuestion", sender: self.guidingQuestions[indexPath.row])
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]
@@ -101,8 +115,12 @@ extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDel
 }
 
 extension GuidingOverViewController : NewQuestionDelegate {
-    func addGuidingQuestion(_ question: GuidingQuestion) {
-        self.guidingQuestions.append(question)
+    func saveGuidingQuestion(_ question: GuidingQuestion) {
+        if !guidingQuestions.contains(question) {
+            let vc = tabBarController?.viewControllers![0] as? CBLOverViewController
+            question.investigate = vc?.cbl?.investigate
+            self.guidingQuestions.append(question)
+        }
         self.tableView.reloadData()
     }
 }

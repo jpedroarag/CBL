@@ -9,5 +9,5 @@
 import Foundation
 
 protocol NewCblDelegate {
-    func addCbl(_ cbl: CBL)
+    func saveCbl(_ cbl: CBL)
 }
