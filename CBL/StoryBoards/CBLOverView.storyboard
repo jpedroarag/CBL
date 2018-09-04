@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,12 +74,49 @@
                     <connections>
                         <outlet property="bigIdeaTextField" destination="b6t-uM-7SV" id="OCi-sd-nqM"/>
                         <outlet property="challengeLabel" destination="hkk-lV-1aK" id="IEw-hj-dSf"/>
+                        <outlet property="datePicker" destination="gsa-LD-cEE" id="riB-aK-RJJ"/>
                         <outlet property="dateTextField" destination="ekx-5F-2aB" id="38o-zB-C6F"/>
                         <outlet property="equipeTextField" destination="wcO-WB-Hfv" id="uc7-Dh-2Sz"/>
                         <outlet property="solutionLabel" destination="0Ev-8A-Wmz" id="qnj-Kh-Eno"/>
+                        <outlet property="viewDatePicker" destination="OZG-dF-Aqa" id="E64-EZ-WDS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q6I-ba-G6s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="OZG-dF-Aqa" userLabel="ViewDatePicker">
+                    <rect key="frame" x="0.0" y="0.0" width="325" height="221"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="gsa-LD-cEE">
+                            <rect key="frame" x="0.0" y="0.0" width="325" height="165"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <date key="date" timeIntervalSinceReferenceDate="557759292.03537703">
+                                <!--2018-09-04 13:08:12 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2jF-Bv-IpQ">
+                            <rect key="frame" x="76" y="172" width="53" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" name="redApp"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelViewDatePicker:" destination="ccj-lt-59t" eventType="touchUpInside" id="x4C-d5-7fR"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWS-GZ-CzV">
+                            <rect key="frame" x="217" y="172" width="30" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Ok"/>
+                            <connections>
+                                <action selector="confirmViewDatePicker:" destination="ccj-lt-59t" eventType="touchUpInside" id="YbD-OM-wmI"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <viewLayoutGuide key="safeArea" id="2mK-Bj-5VY"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-1810.4000000000001" y="979.16041979010504"/>
         </scene>
@@ -86,5 +124,8 @@
     <resources>
         <image name="chalenge" width="25" height="25"/>
         <image name="challengeFilled" width="25" height="25"/>
+        <namedColor name="redApp">
+            <color red="0.88999998569488525" green="0.32899999618530273" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

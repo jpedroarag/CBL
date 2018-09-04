@@ -16,14 +16,18 @@ class CBLOverViewController: UIViewController {
     @IBOutlet weak var equipeTextField: UITextField!
     @IBOutlet weak var challengeLabel: UILabel!
     @IBOutlet weak var solutionLabel: UILabel!
+    @IBOutlet var viewDatePicker: UIView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     var cbl: CBL?
     var delegate: NewCblDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.tabBarItem.image = #imageLiteral(resourceName: "chalenge")
 
+        
+        
+        dateTextField.delegate = self
         bigIdeaTextField.addTarget(self, action: #selector(bigIdeaTextFieldDidChange(_ :)), for: .editingChanged)
         equipeTextField.addTarget(self, action: #selector(teamTextFieldDidChange(_ :)), for: .editingChanged)
         
@@ -78,4 +82,39 @@ class CBLOverViewController: UIViewController {
         delegate?.saveCbl(cbl!)
     }
     
+    
+   
+    @IBAction func cancelViewDatePicker(_ sender: Any) {
+        viewDatePicker.removeFromSuperview()
+    }
+    
+    @IBAction func confirmViewDatePicker(_ sender: Any) {
+        //Seting date formmater
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        dateTextField.text = formatter.string(from: datePicker.date)
+        viewDatePicker.removeFromSuperview()
+    }
+}
+
+extension CBLOverViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == dateTextField{
+            
+
+            viewDatePicker.frame.origin.x = (self.view.frame.size.width / 2) - (viewDatePicker.frame.size.width / 2)
+            viewDatePicker.frame.origin.y = (self.view.frame.size.height / 2) - (viewDatePicker.frame.size.height / 2)
+            viewDatePicker.layer.shadowOpacity = 0.7
+            viewDatePicker.layer.shadowOffset = CGSize(width: 3, height: 3)
+            viewDatePicker.layer.shadowRadius = 15
+            viewDatePicker.layer.shadowColor = UIColor.darkGray.cgColor
+            
+            viewDatePicker.layer.cornerRadius = viewDatePicker.frame.size.height / 10
+            view.addSubview(viewDatePicker)
+            
+            
+            
+        }
+    }
 }
