@@ -22,6 +22,7 @@
 		BE3A15DB2139626A00EE1591 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15D421395B6D00EE1591 /* CoreDataError.swift */; };
 		BE5F1890213977C10012D1ED /* NewQuestionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F188F213977C10012D1ED /* NewQuestionDelegate.swift */; };
 		BE5F18942139B5170012D1ED /* NewCblDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F18932139B5170012D1ED /* NewCblDelegate.swift */; };
+		BE71E829213FFA2E00DC7E9A /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71E828213FFA2E00DC7E9A /* Animations.swift */; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
 		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
 		BED4579A21380D7D0033ECE5 /* CBLOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */; };
@@ -81,6 +82,7 @@
 		BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataErrorTests.swift; sourceTree = "<group>"; };
 		BE5F188F213977C10012D1ED /* NewQuestionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuestionDelegate.swift; sourceTree = "<group>"; };
 		BE5F18932139B5170012D1ED /* NewCblDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCblDelegate.swift; sourceTree = "<group>"; };
+		BE71E828213FFA2E00DC7E9A /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BED4579721380CEE0033ECE5 /* NewCBL.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCBL.storyboard; sourceTree = "<group>"; };
 		BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLOverView.storyboard; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		BE71E825213FF99F00DC7E9A /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				BE71E828213FFA2E00DC7E9A /* Animations.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		BED4579121380C510033ECE5 /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +235,7 @@
 		BEF814F02135970900501E13 /* CBL */ = {
 			isa = PBXGroup;
 			children = (
+				BE71E825213FF99F00DC7E9A /* Animations */,
 				BE3A15D321395B4300EE1591 /* CoreData */,
 				BE3A15D02138441A00EE1591 /* Enums */,
 				BE5F188E2139779F0012D1ED /* Protocols */,
@@ -451,6 +462,7 @@
 				BEF814FA2135970900501E13 /* CBL.xcdatamodeld in Sources */,
 				BE5F1890213977C10012D1ED /* NewQuestionDelegate.swift in Sources */,
 				BE3A15CF213828CD00EE1591 /* QuestionModalViewController.swift in Sources */,
+				BE71E829213FFA2E00DC7E9A /* Animations.swift in Sources */,
 				BE0A830B2138185700E6FDFF /* CBLsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

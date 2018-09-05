@@ -121,7 +121,11 @@ class CBLOverViewController: UIViewController {
     
    
     @IBAction func cancelViewDatePicker(_ sender: Any) {
-        viewDatePicker.removeFromSuperview()
+        
+        Animations.fadeOut(withDuration: 1, forView: viewDatePicker)
+        
+        
+        
     }
     
     @IBAction func confirmViewDatePicker(_ sender: Any) {
@@ -130,7 +134,7 @@ class CBLOverViewController: UIViewController {
         formatter.dateFormat = "dd/MM/yyyy"
         
         dateTextField.text = formatter.string(from: datePicker.date)
-        viewDatePicker.removeFromSuperview()
+        Animations.fadeOut(withDuration: 1, forView: viewDatePicker)
     }
     
     @objc func challengeTextViewTouched(_ sender: UITapGestureRecognizer) {
@@ -179,7 +183,10 @@ extension CBLOverViewController: UITextFieldDelegate{
             viewDatePicker.layer.shadowColor = UIColor.darkGray.cgColor
             
             viewDatePicker.layer.cornerRadius = viewDatePicker.frame.size.height / 10
+            viewDatePicker.alpha = 0
             view.addSubview(viewDatePicker)
+            Animations.fadeIn(withDuration: 1, forView: viewDatePicker, completion: nil)
+            
             
         }
     }
