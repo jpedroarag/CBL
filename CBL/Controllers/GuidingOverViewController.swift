@@ -16,6 +16,14 @@ class GuidingOverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let changeControllerSwipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeController(_:)))
+        changeControllerSwipeLeftGesture.direction = .left
+        self.view.addGestureRecognizer(changeControllerSwipeLeftGesture)
+        
+        let changeControllerSwipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeController(_:)))
+        changeControllerSwipeRightGesture.direction = .right
+        self.view.addGestureRecognizer(changeControllerSwipeRightGesture)
+        
         if guidingQuestions == nil {
             guidingQuestions = [GuidingQuestion]()
         }
@@ -38,6 +46,14 @@ class GuidingOverViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+    }
+    
+    @objc func changeController(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .left {
+            tabBarController?.selectedIndex += 1
+        } else if sender.direction == .right {
+            tabBarController?.selectedIndex -= 1
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
