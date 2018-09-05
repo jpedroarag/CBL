@@ -23,6 +23,7 @@
 		BE5F1890213977C10012D1ED /* NewQuestionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F188F213977C10012D1ED /* NewQuestionDelegate.swift */; };
 		BE5F18942139B5170012D1ED /* NewCblDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F18932139B5170012D1ED /* NewCblDelegate.swift */; };
 		BE71E829213FFA2E00DC7E9A /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71E828213FFA2E00DC7E9A /* Animations.swift */; };
+		BE71E82B2140189800DC7E9A /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71E82A2140189800DC7E9A /* CustomTransition.swift */; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
 		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
 		BED4579A21380D7D0033ECE5 /* CBLOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */; };
@@ -83,6 +84,7 @@
 		BE5F188F213977C10012D1ED /* NewQuestionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuestionDelegate.swift; sourceTree = "<group>"; };
 		BE5F18932139B5170012D1ED /* NewCblDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCblDelegate.swift; sourceTree = "<group>"; };
 		BE71E828213FFA2E00DC7E9A /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		BE71E82A2140189800DC7E9A /* CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
 		BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BED4579721380CEE0033ECE5 /* NewCBL.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCBL.storyboard; sourceTree = "<group>"; };
 		BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLOverView.storyboard; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				BE71E828213FFA2E00DC7E9A /* Animations.swift */,
+				BE71E82A2140189800DC7E9A /* CustomTransition.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 				BEF814F22135970900501E13 /* AppDelegate.swift in Sources */,
 				BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */,
 				BEF814FA2135970900501E13 /* CBL.xcdatamodeld in Sources */,
+				BE71E82B2140189800DC7E9A /* CustomTransition.swift in Sources */,
 				BE5F1890213977C10012D1ED /* NewQuestionDelegate.swift in Sources */,
 				BE3A15CF213828CD00EE1591 /* QuestionModalViewController.swift in Sources */,
 				BE71E829213FFA2E00DC7E9A /* Animations.swift in Sources */,
@@ -683,7 +687,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6XYJN7S9JQ;
 				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -702,7 +705,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6XYJN7S9JQ;
 				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

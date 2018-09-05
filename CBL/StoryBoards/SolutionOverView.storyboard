@@ -58,6 +58,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="solutionTextView" destination="uwA-Fp-Kwb" id="RNl-Ba-YiK"/>
+                        <outlet property="textViewSizeConstraint" destination="tdn-xm-qzm" id="Xvh-RO-tDz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIc-Gi-2SI" userLabel="First Responder" sceneMemberID="firstResponder"/>
