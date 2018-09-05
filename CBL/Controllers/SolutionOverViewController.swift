@@ -34,6 +34,10 @@ class SolutionOverViewController: UIViewController {
         let endEditingGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
         self.view.addGestureRecognizer(endEditingGesture)
         
+        let changeControllerSwipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeController(_:)))
+        changeControllerSwipeRightGesture.direction = .right
+        self.view.addGestureRecognizer(changeControllerSwipeRightGesture)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,6 +48,12 @@ class SolutionOverViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+    }
+    
+    @objc func changeController(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .right {
+            tabBarController?.selectedIndex -= 1
+        }
     }
     
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {

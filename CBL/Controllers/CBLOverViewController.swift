@@ -42,6 +42,12 @@ class CBLOverViewController: UIViewController {
         
         challengeTextView.delegate = self
         
+        view.isUserInteractionEnabled = true
+        
+        let changeControllerSwipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeController(_:)))
+        changeControllerSwipeLeftGesture.direction = .left
+        self.view.addGestureRecognizer(changeControllerSwipeLeftGesture)
+        
         let hideKeyboardTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
         self.view.addGestureRecognizer(hideKeyboardTapGesture)
         
@@ -99,6 +105,12 @@ class CBLOverViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+    }
+    
+    @objc func changeController(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .left {
+            tabBarController?.selectedIndex += 1
+        }
     }
     
     @objc func bigIdeaTextFieldDidChange(_ sender: UITextField) {
@@ -185,8 +197,9 @@ extension CBLOverViewController: UITextFieldDelegate{
             viewDatePicker.layer.cornerRadius = viewDatePicker.frame.size.height / 10
             viewDatePicker.alpha = 0
             view.addSubview(viewDatePicker)
-            Animations.fadeIn(withDuration: 1, forView: viewDatePicker, completion: nil)
             
+            Animations.fadeIn(withDuration: 1, forView: viewDatePicker, completion: nil)
+            textField.resignFirstResponder()
             
         }
     }

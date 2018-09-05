@@ -35,6 +35,14 @@ class SynthesisOverViewController: UIViewController {
         let endEditingGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
         self.view.addGestureRecognizer(endEditingGesture)
         
+        let changeControllerSwipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeController(_:)))
+        changeControllerSwipeLeftGesture.direction = .left
+        self.view.addGestureRecognizer(changeControllerSwipeLeftGesture)
+        
+        let changeControllerSwipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(changeController(_:)))
+        changeControllerSwipeRightGesture.direction = .right
+        self.view.addGestureRecognizer(changeControllerSwipeRightGesture)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +53,14 @@ class SynthesisOverViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+    }
+    
+    @objc func changeController(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .left {
+            tabBarController?.selectedIndex += 1
+        } else if sender.direction == .right {
+            tabBarController?.selectedIndex -= 1
+        }
     }
     
     @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
