@@ -56,6 +56,11 @@ class EssentialOverViewController: UIViewController {
             target?.editingObject = element
         }
         
+        if let element = sender as? (questionObject: EssentialQuestion, actionIdentifier: String) {
+            target?.editingObject = element.questionObject
+            if element.actionIdentifier == "Answer" { target?.willAnswerTextViewBecomeFirstResponder = true }
+        }
+        
     }
     
     @objc func addQuestion(_ sender: UIBarButtonItem) {
@@ -96,7 +101,7 @@ extension EssentialOverViewController: UITableViewDataSource, UITableViewDelegat
         editAction.backgroundColor = UIColor(named: "blueApp")
         
         let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
-            self.performSegue(withIdentifier: "newEssentialQuestion", sender: self.essentialQuestions[indexPath.row])
+            self.performSegue(withIdentifier: "newEssentialQuestion", sender: (questionObject: self.essentialQuestions[indexPath.row], actionIdentifier: "Answer"))
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]

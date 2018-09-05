@@ -29,19 +29,21 @@ class CBLOverViewController: UIViewController {
 //        self.tabBarItem.image = #imageLiteral(resourceName: "chalenge")
 
         bigIdeaTextField.delegate = self
-        dateTextField.delegate = self
-        equipeTextField.delegate = self
-        challengeTextView.delegate = self
+        bigIdeaTextField.returnKeyType = .done
         
-        // Relativos aos textFields
+        dateTextField.delegate = self
+        dateTextField.returnKeyType = .done
+        
+        equipeTextField.delegate = self
+        equipeTextField.returnKeyType = .done
+        
+        challengeTextView.delegate = self
+        challengeTextView.returnKeyType = .done
+        
         let hideKeyboardTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
         self.view.addGestureRecognizer(hideKeyboardTapGesture)
         
-        // Relativo ao textView
-        let hideTapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
-        self.view.addGestureRecognizer(hideTapGesture)
-        
-        let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_:)))
+        let showGesture = UITapGestureRecognizer(target: self, action: #selector(challengeTextViewTouched(_:)))
         self.challengeTextView.addGestureRecognizer(showGesture)
         
         bigIdeaTextField.addTarget(self, action: #selector(bigIdeaTextFieldDidChange(_ :)), for: .editingChanged)
@@ -54,11 +56,12 @@ class CBLOverViewController: UIViewController {
         let essentialController = tabBarControllers![1] as? EssentialOverViewController
         let guidingController = tabBarControllers![2] as? GuidingOverViewController
         let synthesisController = tabBarControllers![3] as? SynthesisOverViewController
-        // let solutionController = tabBarControllers![4] as? SolutionOverViewController
+        let solutionController = tabBarControllers![4] as? SolutionOverViewController
         
         essentialController?.essentialQuestions = (cbl?.engage?.essentialQuestions)?.allObjects as! [EssentialQuestion]
         guidingController?.guidingQuestions = (cbl?.investigate?.guidingQuestions)?.allObjects as! [GuidingQuestion]
         synthesisController?.text = cbl?.investigate?.researchSynthesis
+        solutionController?.text = cbl?.investigate?.solutionConcept
     }
     
     private func setTextFieldsTexts() {
@@ -115,7 +118,7 @@ class CBLOverViewController: UIViewController {
     }
     
     
-    @objc func answerTextViewTouched(_ sender: UITapGestureRecognizer) {
+    @objc func challengeTextViewTouched(_ sender: UITapGestureRecognizer) {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
         challengeTextView.becomeFirstResponder()
     }
@@ -128,22 +131,22 @@ class CBLOverViewController: UIViewController {
         }
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide() {
         UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-            self.challengeTextView.endEditing(true)
+            self.challengeTextView.resignFirstResponder()
         }, completion: nil)
         NotificationCenter.default.removeObserver(self)
         
     }
     
-    @objc func dismissKeyboard(_ sender: UIGestureRecognizer) {
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             UIView.animate(withDuration: 0.5) {
                 if self.bigIdeaTextField.isEditing { self.bigIdeaTextField.endEditing(true) }
                 if self.dateTextField.isEditing { self.dateTextField.endEditing(true) }
                 if self.equipeTextField.isEditing { self.equipeTextField.endEditing(true) }
-                if self.isChallengeTextViewEditing { self.challengeTextView.endEditing(true) }
+                if self.isChallengeTextViewEditing { self.keyboardWillHide() }
             }
         }
     }

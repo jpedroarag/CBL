@@ -16,6 +16,7 @@ class SynthesisOverViewController: UIViewController {
     
     var numberOfLines: Int = 0
     var text: String?
+    var isTextAreaSynthesisEditing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class SynthesisOverViewController: UIViewController {
         
         self.textAreaSynthesis.text = text ?? "Type what you learned"
         
+        let endEditingGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(endEditingGesture)
         
     }
     
@@ -43,11 +46,20 @@ class SynthesisOverViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
+    
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            UIView.animate(withDuration: 0.5) {
+                if self.isTextAreaSynthesisEditing { self.textAreaSynthesis.resignFirstResponder() }
+            }
+        }
+    }
  
 }
 
 extension SynthesisOverViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isTextAreaSynthesisEditing = true
         if textView.textColor == UIColor.lightGray  {
             textView.textColor = UIColor.black
         }
@@ -74,9 +86,10 @@ extension SynthesisOverViewController: UITextViewDelegate{
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        self.isTextAreaSynthesisEditing = false
         textView.textColor = UIColor.lightGray
         if textView.text == "" {
-            textView.text = "Type your challenge"
+            textView.text = "Type what you learned"
         }
     }
 

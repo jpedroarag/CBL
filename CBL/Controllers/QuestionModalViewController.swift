@@ -22,7 +22,10 @@ class QuestionModalViewController: UIViewController {
     var questionType = QuestionType.essential
     var delegate: NewQuestionDelegate?
     var editingObject: NSManagedObject?
+    
     var numberOfLines = 0
+    var isAnswerTextViewEditing = false
+    var willAnswerTextViewBecomeFirstResponder = false
     
     enum QuestionType {
         case essential
@@ -33,22 +36,21 @@ class QuestionModalViewController: UIViewController {
         super.viewDidLoad()
         
         questionTextField.delegate = self
+        questionTextField.returnKeyType = .done
+        
         activityTextField.delegate = self
+        activityTextField.returnKeyType = .done
+        
         resourcesTextField.delegate = self
+        resourcesTextField.returnKeyType = .done
         
         answerTextView.delegate = self
         
-        // Relativos ao textView
-        
-//        let hideTapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardWillHide(notification:)))
-//        self.view.addGestureRecognizer(hideTapGesture)
+        let hideGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(hideGesture)
         
         let showGesture = UITapGestureRecognizer(target: self, action: #selector(answerTextViewTouched(_:)))
         self.answerTextView.addGestureRecognizer(showGesture)
-        
-        // Relativos aos textFields
-        let hideKeyboardTapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
-        self.view.addGestureRecognizer(hideKeyboardTapGesture)
         
         if answerTextView.text == "" {
             answerTextView.textColor = UIColor.lightGray
@@ -86,8 +88,17 @@ class QuestionModalViewController: UIViewController {
         resourcesTextField.text = resources
         answerTextView.text = answer
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if willAnswerTextViewBecomeFirstResponder {
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+            answerTextView.becomeFirstResponder()
+            willAnswerTextViewBecomeFirstResponder = false
+        }
+    }
 
-    func dismiss() {
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -102,20 +113,20 @@ class QuestionModalViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0{
+            if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height
             }
         }
     }
 
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-//            self.answerTextView.endEditing(true)
-//        }, completion: nil)
-//        NotificationCenter.default.removeObserver(self)
-//
-//    }
+    @objc func keyboardWillHide() {
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+            self.answerTextView.resignFirstResponder()
+        }, completion: nil)
+        NotificationCenter.default.removeObserver(self)
+
+    }
     
     @objc func dismissKeyboard(_ sender: UIGestureRecognizer) {
         if sender.state == .ended {
@@ -123,6 +134,7 @@ class QuestionModalViewController: UIViewController {
                 if self.questionTextField.isEditing { self.questionTextField.endEditing(true) }
                 if self.resourcesTextField.isEditing { self.resourcesTextField.endEditing(true) }
                 if self.activityTextField.isEditing { self.activityTextField.endEditing(true) }
+                if self.isAnswerTextViewEditing { self.keyboardWillHide() }
             }
         }
     }
@@ -184,7 +196,7 @@ class QuestionModalViewController: UIViewController {
                 }
             }
             
-            dismiss()
+            self.dismiss(animated: true, completion: nil)
             
         } catch let error {
             let textFieldError = error as? TextFieldError
@@ -198,29 +210,6 @@ class QuestionModalViewController: UIViewController {
         }
     }
     
-    @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss()
-    }
-    
-    func addAccessoryView() -> Void {
-        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonTapped(button:)))
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        toolBar.items = [flexibleSpace,doneButton]
-        toolBar.tintColor = navigationController?.navigationBar.barTintColor
-        toolBar.backgroundColor = navigationController?.navigationBar.backgroundColor
-        self.answerTextView.inputAccessoryView = toolBar
-    }
-    
-    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-            self.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-            self.answerTextView.endEditing(true)
-        }, completion: nil)
-        NotificationCenter.default.removeObserver(self)
-    }
     
 }
 
@@ -235,6 +224,7 @@ extension QuestionModalViewController : UITextFieldDelegate {
 
 extension QuestionModalViewController : UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isAnswerTextViewEditing = true
         if textView.textColor == UIColor.lightGray  {
             textView.textColor = UIColor.black
         }
@@ -242,11 +232,6 @@ extension QuestionModalViewController : UITextViewDelegate{
         if textView.text == "Type your answer" {
             textView.text = ""
         }
-    }
-    
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        self.addAccessoryView()
-        return true
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -266,6 +251,7 @@ extension QuestionModalViewController : UITextViewDelegate{
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        self.isAnswerTextViewEditing = false
         textView.textColor = UIColor.lightGray
         if textView.text == "" {
             textView.text = "Type your answer"

@@ -40,10 +40,6 @@ class GuidingOverViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? UINavigationController
         let target = destination?.topViewController as? QuestionModalViewController
@@ -52,6 +48,11 @@ class GuidingOverViewController: UIViewController {
         
         if let object = sender as? GuidingQuestion {
             target?.editingObject = object
+        }
+        
+        if let element = sender as? (questionObject: GuidingQuestion, actionIdentifier: String) {
+            target?.editingObject = element.questionObject
+            if element.actionIdentifier == "Answer" { target?.willAnswerTextViewBecomeFirstResponder = true }
         }
     }
     
@@ -97,7 +98,7 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
         editAction.backgroundColor = UIColor(named: "blueApp")
         
         let answerAction = UITableViewRowAction(style: .default, title: "Answer") { (action, indexPath) in
-            self.performSegue(withIdentifier: "newGuidingQuestion", sender: self.guidingQuestions[indexPath.row])
+            self.performSegue(withIdentifier: "newGuidingQuestion", sender: (questionObject: self.guidingQuestions[indexPath.row], actionIdentifier: "Answer"))
         }
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]
