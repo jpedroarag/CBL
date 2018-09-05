@@ -16,6 +16,7 @@ class SynthesisOverViewController: UIViewController {
     
     var numberOfLines: Int = 0
     var text: String?
+    var isTextAreaSynthesisEditing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +28,12 @@ class SynthesisOverViewController: UIViewController {
         //Set placeholder for textView
         if textAreaSynthesis.text == "" {
             textAreaSynthesis.textColor = UIColor.lightGray
-            textAreaSynthesis.text = "Type what you learned"
         }
         
-        if let text = text {
-            self.textAreaSynthesis.text = text
-        }
+        self.textAreaSynthesis.text = text ?? "Type what you learned"
         
+        let endEditingGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(endEditingGesture)
         
     }
     
@@ -46,11 +46,20 @@ class SynthesisOverViewController: UIViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
+    
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            UIView.animate(withDuration: 0.5) {
+                if self.isTextAreaSynthesisEditing { self.textAreaSynthesis.resignFirstResponder() }
+            }
+        }
+    }
  
 }
 
 extension SynthesisOverViewController: UITextViewDelegate{
     func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isTextAreaSynthesisEditing = true
         if textView.textColor == UIColor.lightGray  {
             textView.textColor = UIColor.black
         }
@@ -67,11 +76,21 @@ extension SynthesisOverViewController: UITextViewDelegate{
         if numberOfLines < Int(numLines){
             numberOfLines = Int(numLines)
             
-            textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+            if let _ = textViewSizeConstraint {
+                textViewSizeConstraint.constant = textViewSizeConstraint.constant + fontSize!
+            }
         }
         
         return true
 
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.isTextAreaSynthesisEditing = false
+        textView.textColor = UIColor.lightGray
+        if textView.text == "" {
+            textView.text = "Type what you learned"
+        }
     }
 
     func textViewDidChange(_ textView: UITextView) {
