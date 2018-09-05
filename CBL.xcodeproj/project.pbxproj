@@ -18,10 +18,11 @@
 		BE3A15CD213823E700EE1591 /* QuestionModal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3A15CC213823E700EE1591 /* QuestionModal.storyboard */; };
 		BE3A15CF213828CD00EE1591 /* QuestionModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15CE213828CD00EE1591 /* QuestionModalViewController.swift */; };
 		BE3A15D22138444C00EE1591 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15D12138444C00EE1591 /* Errors.swift */; };
-		BE3A15D721395C4900EE1591 /* CoreDataErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */; };
 		BE3A15DB2139626A00EE1591 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15D421395B6D00EE1591 /* CoreDataError.swift */; };
 		BE5F1890213977C10012D1ED /* NewQuestionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F188F213977C10012D1ED /* NewQuestionDelegate.swift */; };
 		BE5F18942139B5170012D1ED /* NewCblDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F18932139B5170012D1ED /* NewCblDelegate.swift */; };
+		BE6301072140172A00E2FA1A /* ErrorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6301062140172A00E2FA1A /* ErrorsTests.swift */; };
+		BE6301092140178400E2FA1A /* CoreDataErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */; };
 		BE71E829213FFA2E00DC7E9A /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71E828213FFA2E00DC7E9A /* Animations.swift */; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
 		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
@@ -82,6 +83,7 @@
 		BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataErrorTests.swift; sourceTree = "<group>"; };
 		BE5F188F213977C10012D1ED /* NewQuestionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuestionDelegate.swift; sourceTree = "<group>"; };
 		BE5F18932139B5170012D1ED /* NewCblDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCblDelegate.swift; sourceTree = "<group>"; };
+		BE6301062140172A00E2FA1A /* ErrorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsTests.swift; sourceTree = "<group>"; };
 		BE71E828213FFA2E00DC7E9A /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BED4579721380CEE0033ECE5 /* NewCBL.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCBL.storyboard; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1AC3762136C6CC009083A4 /* CoreDataManagerTests.swift */,
+				BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */,
 				BE1AC3782136C6CC009083A4 /* Info.plist */,
 			);
 			path = CoreDataManagerTests;
@@ -171,6 +174,14 @@
 				BE5F18932139B5170012D1ED /* NewCblDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		BE6301082140174100E2FA1A /* ErrorsTests */ = {
+			isa = PBXGroup;
+			children = (
+				BE6301062140172A00E2FA1A /* ErrorsTests.swift */,
+			);
+			path = ErrorsTests;
 			sourceTree = "<group>";
 		};
 		BE71E825213FF99F00DC7E9A /* Animations */ = {
@@ -217,6 +228,7 @@
 				BEF815082135970A00501E13 /* CBLTests */,
 				BEF815132135970A00501E13 /* CBLUITests */,
 				BE1AC3752136C6CC009083A4 /* CoreDataManagerTests */,
+				BE6301082140174100E2FA1A /* ErrorsTests */,
 				BEF814EF2135970900501E13 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -255,7 +267,6 @@
 		BEF815082135970A00501E13 /* CBLTests */ = {
 			isa = PBXGroup;
 			children = (
-				BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */,
 				BEF815092135970A00501E13 /* CBLTests.swift */,
 				BEF8150B2135970A00501E13 /* Info.plist */,
 			);
@@ -441,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1AC3772136C6CC009083A4 /* CoreDataManagerTests.swift in Sources */,
+				BE6301092140178400E2FA1A /* CoreDataErrorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,7 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEF8150A2135970A00501E13 /* CBLTests.swift in Sources */,
-				BE3A15D721395C4900EE1591 /* CoreDataErrorTests.swift in Sources */,
+				BE6301072140172A00E2FA1A /* ErrorsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,7 +695,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6XYJN7S9JQ;
 				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -702,7 +713,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6XYJN7S9JQ;
 				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

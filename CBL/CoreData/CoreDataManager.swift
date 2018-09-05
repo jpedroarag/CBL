@@ -25,20 +25,20 @@ class CoreDataManager : NSObject {
     
     func newPersistentContainer(projectName name: String = "CBL") throws -> NSPersistentContainer {
         let container = NSPersistentContainer(name: name)
-        var havePersistentStoresError = false
+        var persistentStoresError = false
         
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if (error as NSError?) != nil { havePersistentStoresError = true }
+            if (error as NSError?) != nil { persistentStoresError = true }
         })
         
-        if havePersistentStoresError { throw CoreDataManagerError.persistentStoresLoadError }
-        if name != "CBL" { throw CoreDataManagerError.nilContainer }
+        if persistentStoresError { throw CoreDataManagerError.persistentStoresLoadError }
         
         return container
     }
     
-    func getContext(projectName name: String = "CBL") throws -> NSManagedObjectContext {
-        if name != "CBL" { throw CoreDataManagerError.invalidContextForName }
+    // MARK: - View Context of Persistent Container
+    func getContext() throws -> NSManagedObjectContext {
+        if persistentContainer == nil { throw CoreDataManagerError.nilContainer }
         return persistentContainer!.viewContext
     }
     
@@ -55,6 +55,7 @@ class CoreDataManager : NSObject {
         }
     }
     
+    // MARK: - Core Data Delete support
     func deleteObject(_ object: NSManagedObject) {
         do {
             let context = try getContext()
@@ -65,6 +66,7 @@ class CoreDataManager : NSObject {
         }
     }
     
+    // MARK: - Core Data Delete All support
     func deleteDataFrom(entity name: String) {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: name)
         let request = NSBatchDeleteRequest(fetchRequest: fetch)
@@ -78,6 +80,7 @@ class CoreDataManager : NSObject {
         }
     }
     
+    // MARK: - Core Data Fetch support
     func getObjects(forEntity name: String) -> [NSManagedObject] {
         let request = NSFetchRequest<NSManagedObject>(entityName: name)
         var results = [NSManagedObject]()

@@ -10,15 +10,12 @@ import Foundation
 
 enum CoreDataManagerError : Error {
     case nilContainer
-    case invalidContextForName
     case persistentStoresLoadError
     
     var localizedDescription : String {
         switch self {
         case .nilContainer:
             return "Persistent container is nil"
-        case .invalidContextForName:
-            return "Invalid context for given name"
         case .persistentStoresLoadError:
             return "Error while loading persistent stores"
         }

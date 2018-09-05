@@ -19,8 +19,4 @@ class CoreDataErrorTests: XCTestCase {
         XCTAssertEqual(CoreDataManagerError.nilContainer.localizedDescription, "Persistent container is nil")
     }
     
-    func test_invalidContextForName() {
-        XCTAssertEqual(CoreDataManagerError.invalidContextForName.localizedDescription, "Invalid context for given name")
-    }
-    
 }
