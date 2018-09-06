@@ -10,6 +10,7 @@ import UIKit
 
 class GuidingOverViewController: UIViewController {
 
+    
     var guidingQuestions: [GuidingQuestion]!
     @IBOutlet weak var tableView: UITableView!
     
@@ -58,6 +59,7 @@ class GuidingOverViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as? UINavigationController
+        
         let target = destination?.topViewController as? QuestionModalViewController
         target?.questionType = .guiding
         target?.delegate = self
@@ -119,6 +121,7 @@ extension GuidingOverViewController: UITableViewDelegate, UITableViewDataSource{
         answerAction.backgroundColor = UIColor(named: "greenApp")
         return [deleteAction, editAction, answerAction]
     }
+    
     
 }
 extension GuidingOverViewController: UITableViewDropDelegate, UITableViewDragDelegate{

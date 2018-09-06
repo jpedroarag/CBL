@@ -10,8 +10,10 @@ import UIKit
 
 class SolutionOverViewController: UIViewController {
     
+    let customTransition = CustomTransition()
+    
     @IBOutlet weak var solutionTextView: UITextView!
-    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var textViewSizeConstraint: NSLayoutConstraint!
     
     var numberOfLines: Int = 0
@@ -108,5 +110,9 @@ extension SolutionOverViewController: UITextViewDelegate{
         cblOverViewVC?.cbl?.investigate?.solutionConcept = self.text
         CoreDataManager.shared.saveContext()
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destination = segue.destination
+        
+        destination.transitioningDelegate = customTransition
+    }
 }

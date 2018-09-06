@@ -11,6 +11,7 @@ import CoreData
 
 class CBLsTableViewController: UIViewController {
 
+    let customTransition = CustomTransition()
     var cbls: [CBL] = []
     @IBOutlet weak var tableView: UITableView!
     
@@ -38,6 +39,9 @@ class CBLsTableViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let dest = segue.destination as? UITabBarController
+        
+        
+        
         let tabBarControllers = dest?.viewControllers!
         let target = tabBarControllers![0] as? CBLOverViewController
         target?.delegate = self
