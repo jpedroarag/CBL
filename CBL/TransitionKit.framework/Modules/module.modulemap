@@ -1,0 +1,4 @@
+framework module TransitionKit {
+    header "TransitionKit-Swift.h"
+    requires objc
+}

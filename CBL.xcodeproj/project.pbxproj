@@ -25,6 +25,18 @@
 		BE6301092140178400E2FA1A /* CoreDataErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A15D621395C4900EE1591 /* CoreDataErrorTests.swift */; };
 		BE71E829213FFA2E00DC7E9A /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71E828213FFA2E00DC7E9A /* Animations.swift */; };
 		BE71E82B2140189800DC7E9A /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE71E82A2140189800DC7E9A /* CustomTransition.swift */; };
+		BEC27512215E82E3000009A0 /* FadeAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC27508215E82E3000009A0 /* FadeAnimationController.swift */; };
+		BEC27513215E82E3000009A0 /* FadeSlideAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC27509215E82E3000009A0 /* FadeSlideAnimationController.swift */; };
+		BEC27514215E82E3000009A0 /* FlipAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2750A215E82E3000009A0 /* FlipAnimationController.swift */; };
+		BEC27515215E82E3000009A0 /* SlideAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2750B215E82E3000009A0 /* SlideAnimationController.swift */; };
+		BEC27516215E82E3000009A0 /* StoryAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2750C215E82E3000009A0 /* StoryAnimationController.swift */; };
+		BEC27517215E82E3000009A0 /* TransitionTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2750F215E82E3000009A0 /* TransitionTabBar.swift */; };
+		BEC27518215E82E3000009A0 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC27510215E82E3000009A0 /* Transition.swift */; };
+		BEC27519215E82E3000009A0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEC27511215E82E3000009A0 /* Info.plist */; };
+		BEC2751D215E83DF000009A0 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2751C215E83DF000009A0 /* CustomTabBarController.swift */; };
+		BEC2754D215E8710000009A0 /* TransitionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC2754C215E870F000009A0 /* TransitionKit.framework */; };
+		BEC2754E215E8723000009A0 /* TransitionKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEC2754C215E870F000009A0 /* TransitionKit.framework */; };
+		BEC2754F215E8723000009A0 /* TransitionKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BEC2754C215E870F000009A0 /* TransitionKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */; };
 		BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579721380CEE0033ECE5 /* NewCBL.storyboard */; };
 		BED4579A21380D7D0033ECE5 /* CBLOverView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */; };
@@ -66,6 +78,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BEC27550215E8723000009A0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BEC2754F215E8723000009A0 /* TransitionKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		BE0A83082138184900E6FDFF /* CBLsTable.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLsTable.storyboard; sourceTree = "<group>"; };
 		BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBLsTableViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +113,17 @@
 		BE6301062140172A00E2FA1A /* ErrorsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsTests.swift; sourceTree = "<group>"; };
 		BE71E828213FFA2E00DC7E9A /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		BE71E82A2140189800DC7E9A /* CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
+		BEC27508215E82E3000009A0 /* FadeAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeAnimationController.swift; sourceTree = "<group>"; };
+		BEC27509215E82E3000009A0 /* FadeSlideAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeSlideAnimationController.swift; sourceTree = "<group>"; };
+		BEC2750A215E82E3000009A0 /* FlipAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlipAnimationController.swift; sourceTree = "<group>"; };
+		BEC2750B215E82E3000009A0 /* SlideAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimationController.swift; sourceTree = "<group>"; };
+		BEC2750C215E82E3000009A0 /* StoryAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryAnimationController.swift; sourceTree = "<group>"; };
+		BEC2750D215E82E3000009A0 /* TransitionKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionKit.h; sourceTree = "<group>"; };
+		BEC2750F215E82E3000009A0 /* TransitionTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionTabBar.swift; sourceTree = "<group>"; };
+		BEC27510215E82E3000009A0 /* Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		BEC27511215E82E3000009A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEC2751C215E83DF000009A0 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		BEC2754C215E870F000009A0 /* TransitionKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TransitionKit.framework; path = CBL/TransitionKit.framework; sourceTree = "<group>"; };
 		BEC2A7972136BB7700275FF9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BED4579721380CEE0033ECE5 /* NewCBL.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewCBL.storyboard; sourceTree = "<group>"; };
 		BED4579921380D7D0033ECE5 /* CBLOverView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CBLOverView.storyboard; sourceTree = "<group>"; };
@@ -122,6 +159,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEC2754E215E8723000009A0 /* TransitionKit.framework in Frameworks */,
+				BEC2754D215E8710000009A0 /* TransitionKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +234,79 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
+		BEC27506215E82E3000009A0 /* TransitionKit */ = {
+			isa = PBXGroup;
+			children = (
+				BEC27507215E82E3000009A0 /* Animation */,
+				BEC2750D215E82E3000009A0 /* TransitionKit.h */,
+				BEC2750E215E82E3000009A0 /* Model */,
+				BEC27511215E82E3000009A0 /* Info.plist */,
+			);
+			name = TransitionKit;
+			path = CBL/TransitionKit;
+			sourceTree = "<group>";
+		};
+		BEC27507215E82E3000009A0 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				BEC27508215E82E3000009A0 /* FadeAnimationController.swift */,
+				BEC27509215E82E3000009A0 /* FadeSlideAnimationController.swift */,
+				BEC2750A215E82E3000009A0 /* FlipAnimationController.swift */,
+				BEC2750B215E82E3000009A0 /* SlideAnimationController.swift */,
+				BEC2750C215E82E3000009A0 /* StoryAnimationController.swift */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		BEC2750E215E82E3000009A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BEC2750F215E82E3000009A0 /* TransitionTabBar.swift */,
+				BEC27510215E82E3000009A0 /* Transition.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BEC2751B215E8398000009A0 /* Custom Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEC2751C215E83DF000009A0 /* CustomTabBarController.swift */,
+			);
+			path = "Custom Controllers";
+			sourceTree = "<group>";
+		};
+		BEC2751E215E850F000009A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEC2754C215E870F000009A0 /* TransitionKit.framework */,
+				BEC2751F215E850F000009A0 /* TransitionKit */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEC2751F215E850F000009A0 /* TransitionKit */ = {
+			isa = PBXGroup;
+			children = (
+				BEC27520215E850F000009A0 /* Animation */,
+				BEC27521215E850F000009A0 /* Model */,
+			);
+			path = TransitionKit;
+			sourceTree = "<group>";
+		};
+		BEC27520215E850F000009A0 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		BEC27521215E850F000009A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		BED4579121380C510033ECE5 /* StoryBoards */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +325,7 @@
 		BED4579221380C730033ECE5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BEC2751B215E8398000009A0 /* Custom Controllers */,
 				BE0A830A2138185700E6FDFF /* CBLsTableViewController.swift */,
 				BE3A15CE213828CD00EE1591 /* QuestionModalViewController.swift */,
 				BE0A830C2138243C00E6FDFF /* EssentialOverViewController.swift */,
@@ -228,11 +341,13 @@
 			isa = PBXGroup;
 			children = (
 				BEF814F02135970900501E13 /* CBL */,
+				BEC27506215E82E3000009A0 /* TransitionKit */,
 				BEF815082135970A00501E13 /* CBLTests */,
 				BEF815132135970A00501E13 /* CBLUITests */,
 				BE1AC3752136C6CC009083A4 /* CoreDataManagerTests */,
 				BE6301082140174100E2FA1A /* ErrorsTests */,
 				BEF814EF2135970900501E13 /* Products */,
+				BEC2751E215E850F000009A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -313,6 +428,7 @@
 				BEF814EA2135970900501E13 /* Sources */,
 				BEF814EB2135970900501E13 /* Frameworks */,
 				BEF814EC2135970900501E13 /* Resources */,
+				BEC27550215E8723000009A0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -427,6 +543,7 @@
 				BE0A83092138184A00E6FDFF /* CBLsTable.storyboard in Resources */,
 				BEF814F72135970900501E13 /* Main.storyboard in Resources */,
 				BED457A021380F720033ECE5 /* SynthesisOverView.storyboard in Resources */,
+				BEC27519215E82E3000009A0 /* Info.plist in Resources */,
 				BED4579821380CEE0033ECE5 /* NewCBL.storyboard in Resources */,
 				BED4579E21380F480033ECE5 /* GuidingOverView.storyboard in Resources */,
 				BE3A15CD213823E700EE1591 /* QuestionModal.storyboard in Resources */,
@@ -467,14 +584,22 @@
 				BE5F18942139B5170012D1ED /* NewCblDelegate.swift in Sources */,
 				BE0A83132138263000E6FDFF /* SolutionOverViewController.swift in Sources */,
 				BE0A830D2138243C00E6FDFF /* EssentialOverViewController.swift in Sources */,
+				BEC27515215E82E3000009A0 /* SlideAnimationController.swift in Sources */,
 				BE3A15DB2139626A00EE1591 /* CoreDataError.swift in Sources */,
+				BEC27518215E82E3000009A0 /* Transition.swift in Sources */,
 				BE0A830F213825A900E6FDFF /* GuidingOverViewController.swift in Sources */,
+				BEC27513215E82E3000009A0 /* FadeSlideAnimationController.swift in Sources */,
+				BEC27514215E82E3000009A0 /* FlipAnimationController.swift in Sources */,
+				BEC27517215E82E3000009A0 /* TransitionTabBar.swift in Sources */,
 				BE3A15D22138444C00EE1591 /* Errors.swift in Sources */,
+				BEC2751D215E83DF000009A0 /* CustomTabBarController.swift in Sources */,
+				BEC27516215E82E3000009A0 /* StoryAnimationController.swift in Sources */,
 				BE0A83152138266A00E6FDFF /* CBLOverViewController.swift in Sources */,
 				BE0A83112138260100E6FDFF /* SynthesisOverViewController.swift in Sources */,
 				BEF814F22135970900501E13 /* AppDelegate.swift in Sources */,
 				BEC2A7982136BB7700275FF9 /* CoreDataManager.swift in Sources */,
 				BEF814FA2135970900501E13 /* CBL.xcdatamodeld in Sources */,
+				BEC27512215E82E3000009A0 /* FadeAnimationController.swift in Sources */,
 				BE71E82B2140189800DC7E9A /* CustomTransition.swift in Sources */,
 				BE5F1890213977C10012D1ED /* NewQuestionDelegate.swift in Sources */,
 				BE3A15CF213828CD00EE1591 /* QuestionModalViewController.swift in Sources */,
@@ -700,7 +825,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
-				DEVELOPMENT_TEAM = 6XYJN7S9JQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CBL",
+				);
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -719,7 +847,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6H6ZL3JRAS;
-				DEVELOPMENT_TEAM = 6XYJN7S9JQ;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CBL",
+				);
 				INFOPLIST_FILE = CBL/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
